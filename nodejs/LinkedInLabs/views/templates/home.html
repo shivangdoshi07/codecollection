@@ -83,7 +83,21 @@
 						    <span class="md-flex" layout="column" layout-align="center center" layout-padding><ng-md-icon icon="add_circle_outline" size="28" ng-click="showAdvanced($event)"></ng-md-icon></span>
 						 </md-toolbar>
 						 <div layout="column" layout-margin>
-						 	Content
+						 <span ng-hide="companyArray.length" style="color:#a5a5a5;font-size:18px">Work Experience information has not been added</span>
+						 	<md-list>
+						      <md-item ng-repeat="company in companyArray">
+						        <md-item-content>
+						          <div class="md-tile-content">
+						            <h2>{{company.name}}</h2>
+						            <h3>{{company.post}}</h3>
+						            <p>
+						              {{company.from}} - {{company.to}}
+						            </p>
+						          </div>
+						        </md-item-content>
+						        <md-divider ng-if="!$last"></md-divider>
+						      </md-item>
+						    </md-list>
 						 </div>
 					  </md-whiteframe>
 				</div>
@@ -139,7 +153,21 @@
 						    <span class="md-flex" layout="column" layout-align="center center" layout-padding><ng-md-icon icon="add_circle_outline" size="28" ng-click="showAdvanced($event)"></ng-md-icon></span>
 						 </md-toolbar>
 						 <div layout="column" layout-margin>
-						 	Content
+						 	<span ng-hide="schoolArray.length" style="color:#a5a5a5;font-size:18px">Education information has not been added</span>
+						 	<md-list>
+						      <md-item ng-repeat="school in schoolArray">
+						        <md-item-content>
+						          <div class="md-tile-content">
+						            <h2>{{school.name}}</h2>
+						            <h3>{{school.degree}}</h3>
+						            <p>
+						              {{school.from}} - {{school.to}}
+						            </p>
+						          </div>
+						        </md-item-content>
+						        <md-divider ng-if="!$last"></md-divider>
+						      </md-item>
+						    </md-list>
 						 </div>
 					  </md-whiteframe>
 				</div>
@@ -196,7 +224,17 @@
 						    <span class="md-flex" layout="column" layout-align="center center" layout-padding><ng-md-icon icon="add_circle_outline" size="28" ng-click="showAdvanced($event)"></ng-md-icon></span>
 						 </md-toolbar>
 						 <div layout="column" layout-margin>
-						 	Content
+						 	<span ng-hide="skillArray.length" style="color:#a5a5a5;font-size:18px">Skills have not been added</span>
+						 	<md-list>
+						      <md-item ng-repeat="skill in skillArray">
+						        <md-item-content>
+						          <div class="md-tile-content">
+						            <h2>{{skill.name}}</h2><span ng-hide="skill.endorsedby <= 0">({{skill.endorsedby}})</span>
+						          </div>
+						        </md-item-content>
+						        <md-divider ng-if="!$last"></md-divider>
+						      </md-item>
+						    </md-list>
 						 </div>
 					  </md-whiteframe>
 				</div>
@@ -208,7 +246,7 @@
    				 <h3>Skills</h3>
     				<md-input-container flex>
           				<label>Name of Skill</label>
-          				<input required placeholder="Name of Skill" ng-model="skill">
+          				<input required placeholder="Name of Skill" ng-model="skill.name">
         			</md-input-container>
   			</md-content>
   			<div class="md-actions" layout="row">
@@ -216,7 +254,7 @@
     			<md-button ng-click="cancel()">
      				Cancel
     			</md-button>
-    			<md-button ng-click="answer(company)" class="md-primary">
+    			<md-button ng-click="answer(skill)" class="md-primary">
      				Add
     			</md-button>
   			</div>

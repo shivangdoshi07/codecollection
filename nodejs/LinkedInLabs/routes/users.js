@@ -39,8 +39,15 @@ module.exports = (function() {
 	
 	//return specific meta details of specific user
 	users.get('/meta/:meta_key/:id', function(req, res) {
-		connection.query('SELECT * FROM user_meta WHERE meta_key='+req.params.meta_key+' AND user_id='+req.params.id, function(err, rows) {
-			res.json(rows);
+		connection.query('SELECT * FROM user_meta WHERE `meta_key`="'+req.params.meta_key+'" AND `user_id`='+req.params.id, function(err, rows) {
+			if(err){
+				console.log(err);
+				res.json ({
+					result: 'error',
+					msg: 'No information found'
+				});
+			}else
+				res.json(rows);
 		});
 	});
 	
@@ -50,6 +57,7 @@ module.exports = (function() {
 		info.user_id = req.params.id;
 		info.meta_key = req.params.meta_key;
 		info.meta_value = JSON.stringify(req.body);
+		info.timestamp = Date.now();
 		connection.query('INSERT INTO user_meta SET ? ', info, function(err, rows) {
 			res.json(rows);
 			console.log("Error" + err)

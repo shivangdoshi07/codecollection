@@ -47,6 +47,16 @@ module.controller('ProfileController', function($scope, $rootScope, dataFactory)
 		});
 
 module.controller('EducationController', function($scope, $mdDialog, dataFactory, $rootScope){
+	$scope.schoolArray = [];
+	getUserMeta('education');
+	function getUserMeta(meta_key){
+		dataFactory.getSpecificUserMeta(meta_key,$rootScope.user.id).success(function(meta_info){
+			for ( var int = 0; int < meta_info.length; int++) {
+				$scope.schoolArray.push(JSON.parse(meta_info[int].meta_value));
+				
+			}
+		})
+	}
 	$scope.showAdvanced = function(ev) {
 	    $mdDialog.show({
 	      controller: EducationDialogController,
@@ -55,7 +65,10 @@ module.controller('EducationController', function($scope, $mdDialog, dataFactory
 	    })
 	    .then(function(answer) {
 	    	console.log(answer);
-	    	dataFactory.setSpecificUserMeta('education',answer,$rootScope.user.id);
+	    	dataFactory.setSpecificUserMeta('education',answer,$rootScope.user.id)
+				    	.success(function(data){
+							   getUserMeta('education');
+						   });
 	    }, function() {
 	    	//this is on cancel
 	    });
@@ -80,6 +93,16 @@ function EducationDialogController($scope, $mdDialog) {
 	}
 
 module.controller('ExperienceController', function($scope, $mdDialog, dataFactory, $rootScope){
+	$scope.companyArray = [];
+	getUserMeta('experience');
+	function getUserMeta(meta_key){
+		dataFactory.getSpecificUserMeta(meta_key,$rootScope.user.id).success(function(meta_info){
+			for ( var int = 0; int < meta_info.length; int++) {
+				$scope.companyArray.push(JSON.parse(meta_info[int].meta_value));
+				
+			}
+		})
+	}
 	$scope.showAdvanced = function(ev) {
 	    $mdDialog.show({
 	      controller: ExperienceDialogController,
@@ -87,7 +110,10 @@ module.controller('ExperienceController', function($scope, $mdDialog, dataFactor
 	      targetEvent: ev,
 	    })
 	    .then(function(answer) {
-	    	dataFactory.setSpecificUserMeta('experience',answer,$rootScope.user.id);
+	    	dataFactory.setSpecificUserMeta('experience',answer,$rootScope.user.id)
+	    			   .success(function(data){
+	    				   getUserMeta('experience');
+	    			   });
 	    }, function() {
 	    });
 	  };
@@ -110,7 +136,17 @@ function ExperienceDialogController($scope, $mdDialog) {
 	  };
 	}
 
-module.controller('SkillController', function($scope, $mdDialog){
+module.controller('SkillController', function($scope, $mdDialog, dataFactory, $rootScope){
+	$scope.skillArray = [];
+	getUserMeta('skill');
+	function getUserMeta(meta_key){
+		dataFactory.getSpecificUserMeta(meta_key,$rootScope.user.id).success(function(meta_info){
+			for ( var int = 0; int < meta_info.length; int++) {
+				$scope.skillArray.push(JSON.parse(meta_info[int].meta_value));
+				
+			}
+		})
+	}
 	$scope.showAdvanced = function(ev) {
 	    $mdDialog.show({
 	      controller: SkillDialogController,
@@ -119,6 +155,11 @@ module.controller('SkillController', function($scope, $mdDialog){
 	    })
 	    .then(function(answer) {
 	    	console.log(answer);
+	    	answer.endorsedby = 0; //initialize the value by 0. Will increment when others endorse the user
+	    	dataFactory.setSpecificUserMeta('skill',answer,$rootScope.user.id)
+	    			   .success(function(data){
+	    				   getUserMeta('skill');
+	    			   });
 	    }, function() {
 	    });
 	  };
