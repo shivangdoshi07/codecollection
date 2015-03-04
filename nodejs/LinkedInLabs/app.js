@@ -4,8 +4,8 @@
  */
 var express = require('express')
   , routes = require('./routes')
-  , session = require('./routes/session')
-  , user = require('./routes/user')
+  , api = require('./routes/api')
+  , viewsRoute = require('./routes/viewsroute')
   , http = require('http')
   , path = require('path');
 
@@ -14,6 +14,7 @@ var logger = require('morgan');
 var methodOverride = require('method-override');
 var errorhandler = require('errorhandler');
 var app = express();
+var session = require('express-session')
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -21,21 +22,46 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({
-	  extended: true
-	}));
-app.use(bodyParser.json());
 
+//configure session 
+app.use(session({
+	  secret: 'keyboard cat',
+	  resave: false,
+	  saveUninitialized: true,
+	  cookie: {maxAge: 60000}
+	}));
+
+//create application/json parser 
+var jsonParser = bodyParser.json();
+// create application/x-www-form-urlencoded parser 
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+ 
 app.use(express.static(path.join(__dirname, 'public')));
-var router = express.Router();
-app.use('/',router);
+
+//check if user session is set else redirect to login
+app.use(function(req,res,next){
+	console.log("Requesting URL " + req.url);
+	/*if(req.session && req.session.user){
+		next();
+	}else{
+		if(req.url === '/' || req.url === '/api/session/login')
+			next();
+		else
+			res.redirect('/');
+	}*/
+	next();
+});
+
+/*========Define routes=======*/
+app.use('/',viewsRoute);
+
+//urlencodedParser will parse params sent from Forms
+app.use('/api',jsonParser,api);
 
 // development only
 if ('development' == app.get('env')) {
   app.use(errorhandler);
 }
-
-router.get('/',user.signup);
 
 
 http.createServer(app).listen(app.get('port'), function(){

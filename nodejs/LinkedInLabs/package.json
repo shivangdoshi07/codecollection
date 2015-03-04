@@ -7,10 +7,12 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.1.0",
     "body-parser": "*",
     "ejs": "*",
     "errorhandler": "*",
     "express": "^4.10.1",
+    "express-session": "^1.10.3",
     "method-override": "*",
     "morgan": "*",
     "mysql": "^2.5.5"

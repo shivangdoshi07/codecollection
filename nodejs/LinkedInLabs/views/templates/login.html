@@ -1,0 +1,72 @@
+<!-- Login View -->
+
+<!-- top bar row -->
+		<div layout="row">
+			<!-- top bar column -->
+			<div ng-controller="LoginController" layout="column" layout-fill>
+			<md-progress-linear class="md-accent" md-mode="indeterminate" ng-show="displayLoader()"></md-progress-linear>
+				<md-toolbar class="md-primary md-hue-7e">
+					<div class="md-toolbar-tools md-toolbar-tools-bottom">
+						<div flex="20"></div>
+						<div flex="30">
+							<h2>LinkedIn Labs</h2>
+						</div>
+						<div layout="row" layout-align="center center" flex="30">
+								<md-input-container flex="40"> <label>Username</label>
+								<input type="text" ng-model="username" required> </md-input-container>
+								<md-input-container flex="40"> <label>Password</label>
+								<input type="password" ng-model="password" required> </md-input-container>
+								<md-button flex="20" class="md-accent" ng-click="login(username,password)">Sign In</md-button>
+						</div>
+						<div flex="20"></div>
+					</div>
+				</md-toolbar>
+			</div>
+		</div>
+
+		<!-- heading row -->
+		<div layout="row">
+			<!-- heading column -->
+			<div flex="20"></div>
+			<div flex layout="row" layout-align="center center">
+				<h1>Join the world's largest professional network.</h1>
+			</div>
+			<div flex="20"></div>
+		</div>
+
+		<!-- sign up row -->
+		<div layout="row">
+			<!-- sign up column -->
+			<div layout="column" flex="15"></div>
+			<div layout="column" layout-align="center center" flex="40" ng-controller="ImageController">
+					<md-grid-list md-cols="3" md-row-height-gt-md="1:1"	md-row-height="3:2" md-gutter="10px" md-gutter-gt-sm="4px">
+						<md-grid-tile ng-repeat="image in images">
+							<img src={{image.src}} />
+						</md-grid-tile>
+					</md-grid-list>
+			</div>
+			<div layout="column" flex="30">
+				<h2>Get started - it's free.</h2>
+				Registration takes less than 2 minutes.
+				<form name="signup" ng-controller="SignupController">
+					<div layout="row">
+						<md-input-container flex="50">
+							<label>First Name</label><input type="text" ng-model="firstname" required>
+						</md-input-container>
+						<md-input-container flex="50">
+							<label>Last	Name</label> <input type="text" ng-model="lastname" required>
+						</md-input-container>
+					</div>
+					<md-input-container>
+						<label>Email Address</label> <input type="email" ng-model="email" required>
+					</md-input-container>
+					<md-input-container>
+						<label>Password</label> <input type="password" ng-model="newpassword" required>
+					</md-input-container>
+					<md-button class="md-raised md-accent" layout-fill>
+						Join Now
+					</md-button>
+				</form>
+			</div>
+			<div layout="column" flex="15"></div>
+		</div>
