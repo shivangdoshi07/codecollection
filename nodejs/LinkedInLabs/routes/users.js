@@ -32,18 +32,30 @@ module.exports = (function() {
 	
 	//return meta details of specific user
 	users.get('/meta/:id', function(req, res) {
-		connection.query('SELECT * FROM users_meta WHERE user_id='+req.params.id, function(err, rows) {
+		connection.query('SELECT * FROM user_meta WHERE user_id='+req.params.id, function(err, rows) {
 			res.json(rows);
 		});
 	});
 	
 	//return specific meta details of specific user
 	users.get('/meta/:meta_key/:id', function(req, res) {
-		connection.query('SELECT * FROM users_meta WHERE meta_key='+req.params.meta_key+' AND user_id='+req.params.id, function(err, rows) {
+		connection.query('SELECT * FROM user_meta WHERE meta_key='+req.params.meta_key+' AND user_id='+req.params.id, function(err, rows) {
 			res.json(rows);
 		});
 	});
-
+	
+	//return specific meta details of specific user
+	users.post('/meta/:meta_key/:id', function(req, res) {
+		var info = {};
+		info.user_id = req.params.id;
+		info.meta_key = req.params.meta_key;
+		info.meta_value = JSON.stringify(req.body);
+		connection.query('INSERT INTO user_meta SET ? ', info, function(err, rows) {
+			res.json(rows);
+			console.log("Error" + err)
+		});
+	});
+	
 	//save new user info in database
 	users.post('/', function(req, res) {
 		var bcrypt = require('bcryptjs');

@@ -71,14 +71,16 @@
 
 <!-- experience card-->
 		<br />
-		<div layout="row" ng-controller="ProfileController">
+		<div layout="row" ng-controller="ExperienceController">
 				<div flex="20"></div>
 				<div flex="60">
 					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
-						<md-toolbar class="md-accent">
+						<md-toolbar class="md-accent" layout="row">
 						    <div class="md-toolbar-tools">
 						      <span class="md-flex">Experience</span>
 						    </div>
+						    <span flex></span>
+						    <span class="md-flex" layout="column" layout-align="center center" layout-padding><ng-md-icon icon="add_circle_outline" size="28" ng-click="showAdvanced($event)"></ng-md-icon></span>
 						 </md-toolbar>
 						 <div layout="column" layout-margin>
 						 	Content
@@ -87,6 +89,40 @@
 				</div>
 				<div flex="20">
 				</div>
+		<script type="text/ng-template" id="experience.html">
+		<md-dialog aria-label="Experience">
+  			<md-content>
+   				 <h3>Education</h3>
+    				<md-input-container flex>
+          				<label>Name of Company</label>
+          				<input required placeholder="Name of Institution" ng-model="company.name">
+        			</md-input-container>
+					<md-input-container flex>
+          				<label>Name of Degree</label>
+          				<input required placeholder="Position" ng-model="company.post">
+        			</md-input-container>
+					<div layout="row" flex>
+						<md-input-container>
+        					<label>From</label>
+        					<input required type="number" step="any" name="from" ng-model="company.from" min="1940" max="4999">
+						</md-input-container>
+						<md-input-container>
+        					<label>To</label>
+        					<input required type="number" step="any" name="to" ng-model="company.to" min="1940" max="4999">
+						</md-input-container>
+					</div>
+  			</md-content>
+  			<div class="md-actions" layout="row">
+    			<div flex><span style="color:red;">{{error}}</span></div>
+    			<md-button ng-click="cancel()">
+     				Cancel
+    			</md-button>
+    			<md-button ng-click="answer(company)" class="md-primary">
+     				Save
+    			</md-button>
+  			</div>
+		</md-dialog>
+		</script>
 		</div>
 
 <!-- education card-->
@@ -143,18 +179,21 @@
   			</div>
 		</md-dialog>
 		</script>
+		
 		</div>
 
 <!-- skill card-->
 		<br />
-		<div layout="row" ng-controller="ProfileController">
+		<div layout="row" ng-controller="SkillController">
 				<div flex="20"></div>
 				<div flex="60">
 					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
-						<md-toolbar class="md-accent">
+						<md-toolbar class="md-accent" layout="row">
 						    <div class="md-toolbar-tools">
 						      <span class="md-flex">Skill</span>
 						    </div>
+						    <span flex></span>
+						    <span class="md-flex" layout="column" layout-align="center center" layout-padding><ng-md-icon icon="add_circle_outline" size="28" ng-click="showAdvanced($event)"></ng-md-icon></span>
 						 </md-toolbar>
 						 <div layout="column" layout-margin>
 						 	Content
@@ -163,4 +202,24 @@
 				</div>
 				<div flex="20">
 				</div>
+		<script type="text/ng-template" id="skill.html">
+		<md-dialog aria-label="Skills">
+  			<md-content>
+   				 <h3>Skills</h3>
+    				<md-input-container flex>
+          				<label>Name of Skill</label>
+          				<input required placeholder="Name of Skill" ng-model="skill">
+        			</md-input-container>
+  			</md-content>
+  			<div class="md-actions" layout="row">
+    			<div flex><span style="color:red;">{{error}}</span></div>
+    			<md-button ng-click="cancel()">
+     				Cancel
+    			</md-button>
+    			<md-button ng-click="answer(company)" class="md-primary">
+     				Add
+    			</md-button>
+  			</div>
+		</md-dialog>
+		</script>
 		</div>

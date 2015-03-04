@@ -15,6 +15,10 @@ module.factory('dataFactory', ['$http', function($http) {
     dataFactory.getSpecificUserMeta = function (meta,id) {
         return $http.get(urlBase + '/meta/'+ meta + '/' + id);
     };
+    
+    dataFactory.setSpecificUserMeta = function (meta_key,meta_value,id) {
+        return $http.post(urlBase + '/meta/'+ meta_key + '/' + id,meta_value);
+    };
 
     dataFactory.updateCustomer = function (cust) {
         return $http.put(urlBase + '/' + cust.ID, cust)
@@ -41,28 +45,24 @@ module.controller('ProfileController', function($scope, $rootScope, dataFactory)
 				})
 			}
 		});
-module.controller('EducationController', function($scope, $mdDialog){
+
+module.controller('EducationController', function($scope, $mdDialog, dataFactory, $rootScope){
 	$scope.showAdvanced = function(ev) {
 	    $mdDialog.show({
-	      controller: DialogController,
+	      controller: EducationDialogController,
 	      templateUrl: 'education.html',
 	      targetEvent: ev,
 	    })
 	    .then(function(answer) {
 	    	console.log(answer);
-	      $scope.alert = 'You said the information was "' + answer + '".';
+	    	dataFactory.setSpecificUserMeta('education',answer,$rootScope.user.id);
 	    }, function() {
-	      $scope.alert = 'You cancelled the dialog.';
+	    	//this is on cancel
 	    });
 	  };
 });
 
-function convertTimestampToDate(timestamp){
-	var d = new Date(timestamp);
-	return d.toDateString() + " " + d.toLocaleTimeString();
-}
-
-function DialogController($scope, $mdDialog) {
+function EducationDialogController($scope, $mdDialog) {
 	  $scope.hide = function() {
 	    $mdDialog.hide();
 	  };
@@ -78,4 +78,66 @@ function DialogController($scope, $mdDialog) {
 			$scope.error = "Error in Year selection!";
 	  };
 	}
-		
+
+module.controller('ExperienceController', function($scope, $mdDialog, dataFactory, $rootScope){
+	$scope.showAdvanced = function(ev) {
+	    $mdDialog.show({
+	      controller: ExperienceDialogController,
+	      templateUrl: 'experience.html',
+	      targetEvent: ev,
+	    })
+	    .then(function(answer) {
+	    	dataFactory.setSpecificUserMeta('experience',answer,$rootScope.user.id);
+	    }, function() {
+	    });
+	  };
+});
+
+function ExperienceDialogController($scope, $mdDialog) {
+	  $scope.hide = function() {
+	    $mdDialog.hide();
+	  };
+	  $scope.cancel = function() {
+	    $mdDialog.cancel();
+	  };
+	  $scope.answer = function(answer) {
+		if(answer.from <= answer.to && answer.name != null && answer.post != null){
+			$mdDialog.hide(answer);
+			$scope.error = "";
+		}
+		else if(answer.from > answer.to)
+			$scope.error = "Error in Year selection!";
+	  };
+	}
+
+module.controller('SkillController', function($scope, $mdDialog){
+	$scope.showAdvanced = function(ev) {
+	    $mdDialog.show({
+	      controller: SkillDialogController,
+	      templateUrl: 'skill.html',
+	      targetEvent: ev,
+	    })
+	    .then(function(answer) {
+	    	console.log(answer);
+	    }, function() {
+	    });
+	  };
+});
+
+function SkillDialogController($scope, $mdDialog) {
+	  $scope.hide = function() {
+	    $mdDialog.hide();
+	  };
+	  $scope.cancel = function() {
+	    $mdDialog.cancel();
+	  };
+	  $scope.answer = function(answer) {
+			$mdDialog.hide(answer);
+			$scope.error = "";
+	  };
+	}
+
+function convertTimestampToDate(timestamp){
+	var d = new Date(timestamp);
+	return d.toDateString() + " " + d.toLocaleTimeString();
+}
