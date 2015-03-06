@@ -48,22 +48,22 @@
 			<div layout="column" flex="30">
 				<h2>Get started - it's free.</h2>
 				Registration takes less than 2 minutes.
-				<form name="signup" ng-controller="SignupController">
+				<form name="signupForm" ng-controller="SignupController">
 					<div layout="row">
 						<md-input-container flex="50">
-							<label>First Name</label><input type="text" ng-model="firstname" required>
+							<label>First Name</label><input type="text" ng-model="newUser.firstname" required>
 						</md-input-container>
 						<md-input-container flex="50">
-							<label>Last	Name</label> <input type="text" ng-model="lastname" required>
+							<label>Last	Name</label> <input type="text" ng-model="newUser.lastname" required>
 						</md-input-container>
 					</div>
 					<md-input-container>
-						<label>Email Address</label> <input type="email" ng-model="email" required>
+						<label>Email Address</label> <input type="email" ng-model="newUser.email" required>
 					</md-input-container>
 					<md-input-container>
-						<label>Password</label> <input type="password" ng-model="newpassword" required>
+						<label>Password</label> <input type="password" ng-model="newUser.password" required>
 					</md-input-container>
-					<md-button class="md-raised md-accent" layout-fill>
+					<md-button class="md-raised md-accent" layout-fill ng-click="signup(newUser)">
 						Join Now
 					</md-button>
 				</form>

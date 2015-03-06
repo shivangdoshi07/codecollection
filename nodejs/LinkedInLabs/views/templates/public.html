@@ -1,0 +1,210 @@
+<!-- header row -->
+		<div layout="row">
+			<!-- top bar column -->
+			<div layout="column" layout-fill>
+				<md-toolbar class="md-medium-tall class="md-primary md-hue-7">
+					<div class="md-toolbar-tools md-toolbar-tools-bottom">
+						<div flex="20"></div>
+						<div flex="20">
+							<h2>LinkedIn Labs</h2>
+						</div>
+						<div flex="20" layout="row">
+							<md-input-container>
+						      <input ng-model="search" type="text">
+						    </md-input-container>
+						    <md-button class="md-accent">Search</md-button>
+						</div>
+						<div flex="30"></div>
+					</div>
+				</md-toolbar>
+			</div>
+		</div>
+
+<!-- menu row -->
+		<div layout="row">
+			<!-- top bar column -->
+			<div layout="column" layout-fill>
+				<md-toolbar md-scroll-shrink>
+					<div class="md-toolbar-tools md-toolbar-tools-bottom background-black" >
+						<div flex="20"></div>
+						<div flex="60" layout="row">
+							<md-button class="md-primary" ng-href="#/home">Home</md-button>
+							<md-button class="md-primary" ng-href="#/home">Profile</md-button>
+							<md-button class="md-primary" ng-href="#/connections">Connections</md-button>
+						</div>
+						<div flex="20"></div>
+					</div>
+				</md-toolbar>
+			</div>
+		</div>
+		
+<!-- profile card-->
+		<div layout="row" ng-controller="PublicProfileController" >
+				<div flex="20"></div>
+				<div flex="60">
+					<md-whiteframe class="md-whiteframe-z1" layout layout-align="left center">
+						<div layout="column">
+							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" height="175px" />
+						</div>
+					    <div layout = "column">
+					    	<div layout = "row">
+					    		<h1>{{userdetails.Firstname + ' '+ userdetails.Lastname}}</h1>
+					    	</div>
+					    	<div layout = "row">
+					    		<h4>Status</h4>
+					    	</div>
+					    	<div layout = "row">
+					    		<h4>Location</h4>
+					    	</div>
+					    </div>
+					    <!-- fill up the space between left and right area -->
+					    <span flex></span>
+					    <div layout = "column" layout-align = "end end">
+					    	<div layout = "row" layout-padding ng-show="!isConnected && !isPending">
+				    			<md-button class="md-accent md-raised md-hue-1" ng-click = "addConnection()">Add connection</md-button>
+				    		</div>
+				    		<div layout = "row" layout-padding ng-show="!isConnected && isPending">
+				    			<md-button class="md-primary">Request Sent</md-button>
+				    		</div>
+					    	<div layout = "row" layout-padding>
+				    			<h5>Last Login: {{userdetails.lastlogin}}</h5>
+				    		</div>
+					    </div>
+					  </md-whiteframe>
+				</div>
+				<div flex="20"></div>
+		</div>
+<!-- summary card-->
+		<br />
+		<div layout="row" ng-controller="PublicSummaryController">
+				<div flex="20"></div>
+				<div flex="60">
+					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
+						<md-toolbar class="md-accent" layout="row">
+						    <div class="md-toolbar-tools">
+						      <span class="md-flex">Summary</span>
+						    </div>
+						    <span flex></span>
+						    
+						 </md-toolbar>
+						 <div layout="column" layout-margin>
+						 	<span ng-hide="summaryArray.length" style="color:#a5a5a5;font-size:18px">Summary has not been added</span>
+						 	<md-list>
+						      <md-item ng-repeat="summary in summaryArray">
+						        <md-item-content>
+						          <div class="md-tile-content">
+						            <h3>{{summary.content}}</h3>
+						          </div>
+						        </md-item-content>
+						        <md-divider ng-if="!$last"></md-divider>
+						      </md-item>
+						    </md-list>
+						 </div>
+					  </md-whiteframe>
+				</div>
+				<div flex="20">
+				</div>
+		</div>
+<!-- experience card-->
+		<br />
+		<div layout="row" ng-controller="PublicExperienceController">
+				<div flex="20"></div>
+				<div flex="60">
+					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
+						<md-toolbar class="md-accent" layout="row">
+						    <div class="md-toolbar-tools">
+						      <span class="md-flex">Experience</span>
+						    </div>
+						    <span flex></span>
+						    
+						 </md-toolbar>
+						 <div layout="column" layout-margin>
+						 <span ng-hide="companyArray.length" style="color:#a5a5a5;font-size:18px">Work Experience information has not been added</span>
+						 	<md-list>
+						      <md-item ng-repeat="company in companyArray">
+						        <md-item-content>
+						          <div class="md-tile-content">
+						            <h2>{{company.name}}</h2>
+						            <h3>{{company.post}}</h3>
+						            <p>
+						              {{company.from}} - {{company.to}}
+						            </p>
+						          </div>
+						        </md-item-content>
+						        <md-divider ng-if="!$last"></md-divider>
+						      </md-item>
+						    </md-list>
+						 </div>
+					  </md-whiteframe>
+				</div>
+				<div flex="20">
+				</div>
+		</div>
+
+<!-- education card-->
+		<br />
+		<div layout="row" ng-controller="PublicEducationController">
+				<div flex="20"></div>
+				<div flex="60">
+					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
+						<md-toolbar class="md-accent" layout="row">
+						    <div class="md-toolbar-tools">
+						      <span class="md-flex">Education</span>
+						    </div>
+						    <span flex></span>
+						    
+						 </md-toolbar>
+						 <div layout="column" layout-margin>
+						 	<span ng-hide="schoolArray.length" style="color:#a5a5a5;font-size:18px">Education information has not been added</span>
+						 	<md-list>
+						      <md-item ng-repeat="school in schoolArray">
+						        <md-item-content>
+						          <div class="md-tile-content">
+						            <h2>{{school.name}}</h2>
+						            <h3>{{school.degree}}</h3>
+						            <p>
+						              {{school.from}} - {{school.to}}
+						            </p>
+						          </div>
+						        </md-item-content>
+						        <md-divider ng-if="!$last"></md-divider>
+						      </md-item>
+						    </md-list>
+						 </div>
+					  </md-whiteframe>
+				</div>
+				<div flex="20">
+				</div>
+		</div>
+
+<!-- skill card-->
+		<br />
+		<div layout="row" ng-controller="PublicSkillController">
+				<div flex="20"></div>
+				<div flex="60">
+					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
+						<md-toolbar class="md-accent" layout="row">
+						    <div class="md-toolbar-tools">
+						      <span class="md-flex">Skill</span>
+						    </div>
+						    <span flex></span>
+						    
+						 </md-toolbar>
+						 <div layout="column" layout-margin>
+						 	<span ng-hide="skillArray.length" style="color:#a5a5a5;font-size:18px">Skills have not been added</span>
+						 	<md-list>
+						      <md-item ng-repeat="skill in skillArray">
+						        <md-item-content>
+						          <div class="md-tile-content">
+						            <h3>{{skill.name}}</h3><span ng-hide="skill.endorsedby <= 0">({{skill.endorsedby}})</span>
+						          </div>
+						        </md-item-content>
+						        <md-divider ng-if="!$last"></md-divider>
+						      </md-item>
+						    </md-list>
+						 </div>
+					  </md-whiteframe>
+				</div>
+				<div flex="20">
+				</div>
+		</div>

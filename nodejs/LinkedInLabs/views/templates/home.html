@@ -9,10 +9,7 @@
 							<h2>LinkedIn Labs</h2>
 						</div>
 						<div flex="20" layout="row">
-							<md-input-container>
-						      <input ng-model="search" type="text">
-						    </md-input-container>
-						    <md-button class="md-accent">Search</md-button>
+							
 						</div>
 						<div flex="30"></div>
 					</div>
@@ -25,12 +22,12 @@
 			<!-- top bar column -->
 			<div layout="column" layout-fill>
 				<md-toolbar md-scroll-shrink>
-					<div class="md-toolbar-tools md-toolbar-tools-bottom background-black" >
+					<div class="md-toolbar-tools md-toolbar-tools-bottom background-black">
 						<div flex="20"></div>
 						<div flex="60" layout="row">
-							<md-button class="md-primary" ng-href="home">Home</md-button>
-							<md-button class="md-primary" ng-href="home">Profile</md-button>
-							<md-button class="md-primary" ng-href="home">Connections</md-button>
+							<md-button class="md-primary" ng-href="#/home">Home</md-button>
+							<md-button class="md-primary" ng-href="#/home">Profile</md-button>
+							<md-button class="md-primary" ng-href="#/connections">Connections</md-button>			
 						</div>
 						<div flex="20"></div>
 					</div>
@@ -68,7 +65,60 @@
 				</div>
 				<div flex="20"></div>
 		</div>
-
+<!-- Summary card-->
+		<br />
+		<div layout="row" ng-controller="SummaryController">
+				<div flex="20"></div>
+				<div flex="60">
+					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
+						<md-toolbar class="md-accent" layout="row">
+						    <div class="md-toolbar-tools">
+						      <span class="md-flex">Summary</span>
+						    </div>
+						    <span flex></span>
+						    <span class="md-flex" layout="column" layout-align="center center" layout-padding><ng-md-icon icon="add_circle_outline" size="28" ng-click="showAdvanced($event)"></ng-md-icon></span>
+						 </md-toolbar>
+						 <div layout="column" layout-margin>
+						 	<span ng-hide="summaryArray.length" style="color:#a5a5a5;font-size:18px">Summary has not been added</span>
+						 	<md-list>
+						      <md-item ng-repeat="summary in summaryArray">
+						        <md-item-content>
+						          <div class="md-tile-content" layout="column">
+						          	<div layout="column"><h3>{{summary.content}}</h3></div>
+						          	<div flex></div>
+						          </div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="showAdvanced($event)"></ng-md-icon></div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="delete" size="20" ng-click="deleteMeta(summary.id)"></ng-md-icon></div>
+						        </md-item-content>
+						        <md-divider ng-if="!$last"></md-divider>
+						      </md-item>
+						    </md-list>
+						 </div>
+					  </md-whiteframe>
+				</div>
+				<div flex="20">
+				</div>
+		<script type="text/ng-template" id="summary.html">
+		<md-dialog aria-label="Summary">
+  			<md-content>
+   				 <h3>Summary</h3>
+    				<md-input-container flex>
+          				<label>Summary</label>
+          				<textarea required placeholder="Write something about yourself." ng-model="summary.content" rows="3" cols = "80"></textarea>
+        			</md-input-container>
+  			</md-content>
+  			<div class="md-actions" layout="row">
+    			<div flex><span style="color:red;">{{error}}</span></div>
+    			<md-button ng-click="cancel()">
+     				Cancel
+    			</md-button>
+    			<md-button ng-click="answer(summary)" class="md-primary">
+     				Add
+    			</md-button>
+  			</div>
+		</md-dialog>
+		</script>
+		</div>
 <!-- experience card-->
 		<br />
 		<div layout="row" ng-controller="ExperienceController">
@@ -94,6 +144,8 @@
 						              {{company.from}} - {{company.to}}
 						            </p>
 						          </div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="showAdvanced($event)"></ng-md-icon></div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="delete" size="20" ng-click="deleteMeta(company.id)"></ng-md-icon></div>
 						        </md-item-content>
 						        <md-divider ng-if="!$last"></md-divider>
 						      </md-item>
@@ -112,7 +164,7 @@
           				<input required placeholder="Name of Institution" ng-model="company.name">
         			</md-input-container>
 					<md-input-container flex>
-          				<label>Name of Degree</label>
+          				<label>Position</label>
           				<input required placeholder="Position" ng-model="company.post">
         			</md-input-container>
 					<div layout="row" flex>
@@ -164,6 +216,8 @@
 						              {{school.from}} - {{school.to}}
 						            </p>
 						          </div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="showAdvanced($event)"></ng-md-icon></div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="delete" size="20" ng-click="deleteMeta(school.id)"></ng-md-icon></div>
 						        </md-item-content>
 						        <md-divider ng-if="!$last"></md-divider>
 						      </md-item>
@@ -229,8 +283,10 @@
 						      <md-item ng-repeat="skill in skillArray">
 						        <md-item-content>
 						          <div class="md-tile-content">
-						            <h2>{{skill.name}}</h2><span ng-hide="skill.endorsedby <= 0">({{skill.endorsedby}})</span>
+						            <h3>{{skill.name}}</h3><span ng-hide="skill.endorsedby <= 0">({{skill.endorsedby}})</span>
 						          </div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="showAdvanced($event)"></ng-md-icon></div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="delete" size="20" ng-click="deleteMeta(skill.id)"></ng-md-icon></div>
 						        </md-item-content>
 						        <md-divider ng-if="!$last"></md-divider>
 						      </md-item>

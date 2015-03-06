@@ -1,0 +1,108 @@
+<!-- header row -->
+		<div layout="row">
+			<!-- top bar column -->
+			<div layout="column" layout-fill>
+				<md-toolbar class="md-medium-tall class="md-primary md-hue-7">
+					<div class="md-toolbar-tools md-toolbar-tools-bottom">
+						<div flex="20"></div>
+						<div flex="20">
+							<h2>LinkedIn Labs</h2>
+						</div>
+						<div flex="20" layout="row">
+							<md-input-container>
+						      <input ng-model="search" type="text">
+						    </md-input-container>
+						    <md-button class="md-accent">Search</md-button>
+						</div>
+						<div flex="30"></div>
+					</div>
+				</md-toolbar>
+			</div>
+		</div>
+
+<!-- menu row -->
+		<div layout="row">
+			<!-- top bar column -->
+			<div layout="column" layout-fill>
+				<md-toolbar md-scroll-shrink>
+					<div class="md-toolbar-tools md-toolbar-tools-bottom background-black" >
+						<div flex="20"></div>
+						<div flex="60" layout="row">
+							<md-button class="md-primary" ng-href="#/home">Home</md-button>
+							<md-button class="md-primary" ng-href="#/home">Profile</md-button>
+							<md-button class="md-primary" ng-href="#/connections">Connections</md-button>
+						</div>
+						<div flex="20"></div>
+					</div>
+				</md-toolbar>
+			</div>
+		</div>
+		
+<!-- profile card-->
+		<div layout="row" ng-controller="ProfileController" >
+				<div flex="20"></div>
+				<div flex="60">
+					<md-whiteframe class="md-whiteframe-z1" layout layout-align="left center">
+						<div layout="column">
+							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" height="175px" />
+						</div>
+					    <div layout = "column">
+					    	<div layout = "row">
+					    		<h1>{{userdetails.Firstname + ' '+ userdetails.Lastname}}</h1>
+					    	</div>
+					    	<div layout = "row">
+					    		<h4>Status</h4>
+					    	</div>
+					    	<div layout = "row">
+					    		<h4>Location</h4>
+					    	</div>
+					    </div>
+					    <!-- fill up the space between left and right area -->
+					    <span flex></span>
+					    <div layout = "column" layout-align = "end end">
+					    	<div layout = "row" layout-padding>
+				    			<h5>Last Login: {{userdetails.lastlogin}}</h5>
+				    		</div>
+					    </div>
+					  </md-whiteframe>
+				</div>
+				<div flex="20"></div>
+		</div>
+		
+<!-- connections card-->
+		<br />
+		<div layout="row" ng-controller="ConnectionsController">
+				<div flex="20"></div>
+				<div flex="60">
+					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
+						<md-toolbar class="md-accent" layout="row">
+						    <div class="md-toolbar-tools">
+						      <span class="md-flex">Connections</span>
+						    </div>
+						    <span flex></span>
+						 </md-toolbar>
+						 <div layout="column" layout-margin>
+						 	<span ng-hide="connectionArray.length" style="color:#a5a5a5;font-size:18px">You dont have any connections</span>
+						 	<md-list>
+						      <md-item ng-repeat="connection in connectionArray">
+						        <md-item-content>
+						          <div class="md-tile-content">
+						          	<div layout="column">
+						          		<h2><a href="#/user/{{connection.Id}}">{{connection.Firstname}} {{connection.Lastname}}</a></h2>
+							            <h3>{{connection.Email}}</h3>
+							            <h3>Last Active: {{connection.lastlogin}}</h3>
+						          	</div>
+						          	<div layout="column">
+						          		<h3>Your connection since: {{connection.connectionsince}}</h3>
+						          	</div>
+						          </div>
+						        </md-item-content>
+						        <md-divider ng-if="!$last"></md-divider>
+						      </md-item>
+						    </md-list>
+						 </div>
+					  </md-whiteframe>
+				</div>
+				<div flex="20">
+				</div>
+		</div>

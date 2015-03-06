@@ -10,6 +10,12 @@ module.exports = (function() {
 	viewsRoute.get('/home', function(req, res) {
 		res.render('templates/home');
 		});
+	viewsRoute.get('/public', function(req, res) {
+		res.render('templates/public');
+		});
+	viewsRoute.get('/connections', function(req, res) {
+		res.render('templates/connections');
+		});
 	
 	viewsRoute.get('/', function(req, res) {
 		res.render('index');

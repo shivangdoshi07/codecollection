@@ -19,7 +19,7 @@ module.exports = (function() {
 	// Routes
 	session.post('/login',function(req,res){
 		var credentials = req.body;
-		connection.query('SELECT id, firstname, lastname, salt, password FROM users WHERE email = ?', credentials.email, function(err, rows) {
+		connection.query('SELECT id, firstname, lastname, email, salt, password FROM users WHERE email = ?', credentials.email, function(err, rows) {
 			if (err) {
 				console.error(err);
 				res.statusCode = 500;

@@ -1,5 +1,5 @@
 angular
-		.module('frontpage', [ 'ngMaterial','ngRoute','ngMdIcons' ])
+		.module('frontpage', [ 'ngMaterial','ngRoute','ngMdIcons','mdChips' ])
 
 		.controller('AppCtrl', function($scope,$window,$rootScope) {
 			if($window.sessionStorage.user != null)
@@ -13,7 +13,6 @@ angular
 						return isLoaderVisible;
 					}
 					$scope.login = function(username, password) {
-						console.log("calling login function");
 						isLoaderVisible = true;
 						var credentials = {};
 						credentials.email = username;
@@ -33,8 +32,24 @@ angular
 								});
 					}
 				})
-		.controller('SignupController', function($scope) {
-
+		.controller('SignupController', function($scope, $http, $rootScope, $window, $location) {
+			$scope.signup = function(newUser) {
+				isLoaderVisible = true;
+				var credentials = {};
+				
+				$http.post('/api/user', newUser).success(
+						function(data, status, headers, config) {
+							isLoaderVisible = false;
+							$rootScope.user = data.user;
+							$window.sessionStorage.user = JSON.stringify(data.user);
+							console.log(data.user);
+							$location.path('/home');
+						}).error(
+						function(data, status, headers, config) {
+							isLoaderVisible = false;
+							console.log(data, status, headers, config);
+						});
+			}
 		})
 		.controller(
 				'ImageController',
@@ -68,8 +83,16 @@ angular
 							templateUrl: '/login',
 							controller: 'LoginController'
 						})
+						.when('/user/:id', {
+						    templateUrl: '/public',
+						    controller: 'LoginController'
+						  })
 						.when('/home', {
 							templateUrl: '/home',
+							controller: 'LoginController'
+						})
+						.when('/connections', {
+							templateUrl: '/connections',
 							controller: 'LoginController'
 						})
 						.otherwise({
