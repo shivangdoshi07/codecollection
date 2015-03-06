@@ -87,7 +87,7 @@
 						          	<div layout="column"><h3>{{summary.content}}</h3></div>
 						          	<div flex></div>
 						          </div>
-						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="showAdvanced($event)"></ng-md-icon></div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="updateMeta(summary.id,$event)"></ng-md-icon></div>
 						          <div layout="column" layout-align="end start"><ng-md-icon icon="delete" size="20" ng-click="deleteMeta(summary.id)"></ng-md-icon></div>
 						        </md-item-content>
 						        <md-divider ng-if="!$last"></md-divider>
@@ -144,7 +144,7 @@
 						              {{company.from}} - {{company.to}}
 						            </p>
 						          </div>
-						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="showAdvanced($event)"></ng-md-icon></div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="updateMeta(company.id,$event)"></ng-md-icon></div>
 						          <div layout="column" layout-align="end start"><ng-md-icon icon="delete" size="20" ng-click="deleteMeta(company.id)"></ng-md-icon></div>
 						        </md-item-content>
 						        <md-divider ng-if="!$last"></md-divider>
@@ -216,7 +216,7 @@
 						              {{school.from}} - {{school.to}}
 						            </p>
 						          </div>
-						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="showAdvanced($event)"></ng-md-icon></div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="updateMeta(school.id,$event)"></ng-md-icon></div>
 						          <div layout="column" layout-align="end start"><ng-md-icon icon="delete" size="20" ng-click="deleteMeta(school.id)"></ng-md-icon></div>
 						        </md-item-content>
 						        <md-divider ng-if="!$last"></md-divider>
@@ -285,7 +285,7 @@
 						          <div class="md-tile-content">
 						            <h3>{{skill.name}}</h3><span ng-hide="skill.endorsedby <= 0">({{skill.endorsedby}})</span>
 						          </div>
-						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="showAdvanced($event)"></ng-md-icon></div>
+						          <div layout="column" layout-align="end start"><ng-md-icon icon="mode_edit" size="20" ng-click="updateMeta(skill.id,$event)"></ng-md-icon></div>
 						          <div layout="column" layout-align="end start"><ng-md-icon icon="delete" size="20" ng-click="deleteMeta(skill.id)"></ng-md-icon></div>
 						        </md-item-content>
 						        <md-divider ng-if="!$last"></md-divider>
@@ -311,7 +311,7 @@
      				Cancel
     			</md-button>
     			<md-button ng-click="answer(skill)" class="md-primary">
-     				Add
+     				Save
     			</md-button>
   			</div>
 		</md-dialog>

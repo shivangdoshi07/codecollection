@@ -67,9 +67,10 @@ module.exports = (function() {
 	
 	//update specific meta details of specific user
 	users.put('/meta/:user_id/:meta_id', function(req, res) {
-		var newInfo = req.body;
+		var newInfo = {};
+		newInfo.meta_value = JSON.stringify(req.body);
 		newInfo.timestamp = Date.now();
-		connection.query('UPDATE user_meta SET ? WHERE `user_id` '+req.params.user_id+' AND id = '+req.params.meta_id, function(err, rows) {
+		connection.query('UPDATE user_meta SET ? WHERE `user_id` = '+req.params.user_id+' AND id = '+req.params.meta_id,newInfo, function(err, rows) {
 			if(err){
 				console.log(err);
 				res.json ({
