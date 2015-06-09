@@ -75,8 +75,8 @@ angular
 							}, ]
 				}).config(
 				function($mdThemingProvider,$routeProvider) {
-					$mdThemingProvider.theme('default').primaryPalette('blue-grey')
-							.accentPalette('deep-orange');
+					$mdThemingProvider.theme('default').primaryPalette('indigo')
+							.accentPalette('red');
 					//$routeProvider
 					$routeProvider
 						.when('/', {
@@ -85,6 +85,10 @@ angular
 						})
 						.when('/user/:id', {
 						    templateUrl: '/public',
+						    controller: 'LoginController'
+						  })
+						  .when('/search/:q', {
+						    templateUrl: '/search',
 						    controller: 'LoginController'
 						  })
 						.when('/home', {

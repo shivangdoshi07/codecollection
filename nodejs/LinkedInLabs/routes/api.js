@@ -1,6 +1,7 @@
 var express = require('express');
 var users = require('./users');
 var session = require('./session');
+var search = require('./search');
 
 module.exports = (function() {
 	'use strict';
@@ -15,6 +16,7 @@ module.exports = (function() {
 	//Route to different APIs
 	api.use('/user', users);
 	api.use('/session',session);
+	api.use('/search',search);
 	api.use('/random',function(req,res){
 		console.log(req.body);
 	});

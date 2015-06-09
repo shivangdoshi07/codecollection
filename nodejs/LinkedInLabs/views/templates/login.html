@@ -40,9 +40,7 @@
 			<div layout="column" flex="15"></div>
 			<div layout="column" layout-align="center center" flex="40" ng-controller="ImageController">
 					<md-grid-list md-cols="3" md-row-height-gt-md="1:1"	md-row-height="3:2" md-gutter="10px" md-gutter-gt-sm="4px">
-						<md-grid-tile ng-repeat="image in images">
-							<img src={{image.src}} />
-						</md-grid-tile>
+							<img ng-repeat="image in images" src={{image.src}} />
 					</md-grid-list>
 			</div>
 			<div layout="column" flex="30">

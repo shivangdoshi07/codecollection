@@ -24,12 +24,20 @@ module.factory('dataFactory', ['$http', function($http) {
         return $http.get(urlBase + '/connections/'+id);
     };
     
+    dataFactory.getUserConnectionsInvites = function (id) {
+        return $http.get(urlBase + '/invite/connections/'+id);
+    };
+    
     dataFactory.setSpecificUserMeta = function (meta_key,meta_value,id) {
         return $http.post(urlBase + '/meta/'+ meta_key + '/' + id,meta_value);
     };
 
     dataFactory.updateUserMeta = function (userid,metaid,meta_value) {
         return $http.put(urlBase + '/meta/'+ userid + '/' + metaid, meta_value)
+    };
+    
+    dataFactory.acceptUserConnection = function (sender_id,acceptor_id) {
+        return $http.put(urlBase + '/connections/'+sender_id+'/'+acceptor_id);
     };
     
     dataFactory.deleteUserMeta = function (userid,id) {

@@ -3,13 +3,8 @@
  */
 
 var express = require('express');
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-	host : 'localhost',
-	user : 'root',
-	password : 'root'
-});
-connection.query('USE linkedinlabs');
+var connectionpool = require('./connectionpool');
+var connection = connectionpool.getConnection().connection;
 
 // --- Following is executed when user hits /api/session
 module.exports = (function() {
@@ -40,11 +35,11 @@ module.exports = (function() {
 						delete rows[0].salt;
 						delete rows[0].password;
 						req.session.user = rows[0];
+						
 						res.send({
 							result : 'login',
 							user: rows[0]
 						});
-						res.statusCode = 200;
 					}else{
 						res.send({
 							result : 'fail',
@@ -59,9 +54,7 @@ module.exports = (function() {
 	session.post('/logout',function(req,res){
 		req.session = null;
 		connection.query('UPDATE users SET timestamp = ' + Date.now() + ' WHERE id = ?', rows[0].id, function(err, row) {
-			res.send({
-				result : 'logout'
-			});
+			res.redirect('/');
 		});
 	});
 

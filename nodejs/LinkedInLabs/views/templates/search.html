@@ -36,7 +36,8 @@
 				</md-toolbar>
 			</div>
 		</div>
-				
+
+		
 <!-- profile card-->
 		<div layout="row" ng-controller="ProfileController" >
 				<div flex="20"></div>
@@ -48,6 +49,12 @@
 					    <div layout = "column">
 					    	<div layout = "row">
 					    		<h1>{{userdetails.Firstname + ' '+ userdetails.Lastname}}</h1>
+					    	</div>
+					    	<div layout = "row">
+					    		<h4>Status</h4>
+					    	</div>
+					    	<div layout = "row">
+					    		<h4>Location</h4>
 					    	</div>
 					    </div>
 					    <!-- fill up the space between left and right area -->
@@ -62,78 +69,31 @@
 				<div flex="20"></div>
 		</div>
 		
-<!-- invites card-->
-		<br />
-		<div layout="row" ng-controller="InvitesController" ng-show="inviteArray.length">
-				<div flex="20"></div>
-				<div flex="60">
-					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
-						<md-toolbar class="md-accent" layout="row">
-						    <div class="md-toolbar-tools">
-						      <span class="md-flex">Invites</span>
-						    </div>
-						    <span flex></span>
-						 </md-toolbar>
-						 <div layout="column" layout-margin>
-						 	<span ng-hide="inviteArray.length" style="color:#a5a5a5;font-size:18px">No pending invites</span>
-						 	<md-list>
-						      <md-item ng-repeat="invite in inviteArray">
-						        <md-item-content>
-						          <div class="md-tile-left">
-						              <img ng-src="{{invite.profilepic}}" alt="{{invite.Firstname}}" class="face">
-						          </div>
-						          <div class="md-tile-content" layout="row">
-						          	<div layout="column">
-						          		<h2><a href="#/user/{{invite.Id}}">{{invite.Firstname}} {{invite.Lastname}}</a></h2>
-							            <h3>{{invite.Email}}</h3>
-							            <h3>Last Active: {{invite.lastlogin}}</h3>
-						          	</div>
-						          	<div flex></div>
-						          	<div layout="column" layout-align="center end">
-						          		<md-button class="md-primary md-raised md-hue-1" ng-click = "acceptConnection(invite.Id)">Accept</md-button>
-						          		<br />
-						          		<h3>Sent on: {{invite.invitesenton}}</h3>
-						          	</div>
-						          </div>
-						        </md-item-content>
-						        <md-divider ng-if="!$last"></md-divider>
-						      </md-item>
-						    </md-list>
-						 </div>
-					  </md-whiteframe>
-				</div>
-				<div flex="20">
-				</div>
-		</div>
-
 <!-- connections card-->
 		<br />
-		<div layout="row" ng-controller="ConnectionsController">
+		<div layout="row" ng-controller="SearchResultController">
 				<div flex="20"></div>
 				<div flex="60">
 					<md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="left center">
 						<md-toolbar class="md-accent" layout="row">
 						    <div class="md-toolbar-tools">
-						      <span class="md-flex">Connections</span>
+						      <span class="md-flex">Results</span>
 						    </div>
 						    <span flex></span>
 						 </md-toolbar>
 						 <div layout="column" layout-margin>
-						 	<span ng-hide="connectionArray.length" style="color:#a5a5a5;font-size:18px">You dont have any connections</span>
+						 	<span ng-hide="searchResultArray.length" style="color:#a5a5a5;font-size:18px">No results found!</span>
 						 	<md-list>
-						      <md-item ng-repeat="connection in connectionArray">
+						      <md-item ng-repeat="searchResult in searchResultArray">
 						        <md-item-content>
-						          <div class="md-tile-left">
-						              <img ng-src="{{connection.profilepic}}" alt="{{connection.Firstname}}" class="face">
-						          </div>
+						        	<div class="md-tile-left">
+						              <img ng-src="{{searchResult.profilepic}}" alt="{{searchResult.Firstname}}" class="face">
+						            </div>
 						          <div class="md-tile-content">
 						          	<div layout="column">
-						          		<h2><a href="#/user/{{connection.Id}}">{{connection.Firstname}} {{connection.Lastname}}</a></h2>
-							            <h3>{{connection.Email}}</h3>
-							            <h3>Last Active: {{connection.lastlogin}}</h3>
-						          	</div>
-						          	<div layout="column">
-						          		<h3>Your connection since: {{connection.connectionsince}}</h3>
+						          		<h2><a href="#/user/{{searchResult.Id}}">{{searchResult.Firstname}} {{searchResult.Lastname}}</a></h2>
+							            <h3>{{searchResult.Email}}</h3>
+							            <h3>Last Active: {{searchResult.lastlogin}}</h3>
 						          	</div>
 						          </div>
 						        </md-item-content>

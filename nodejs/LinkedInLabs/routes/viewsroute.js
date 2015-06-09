@@ -17,6 +17,10 @@ module.exports = (function() {
 		res.render('templates/connections');
 		});
 	
+	viewsRoute.get('/search', function(req, res) {
+		res.render('templates/search');
+		});
+	
 	viewsRoute.get('/', function(req, res) {
 		res.render('index');
 	});

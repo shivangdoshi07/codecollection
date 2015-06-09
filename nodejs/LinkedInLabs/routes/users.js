@@ -1,24 +1,24 @@
-var express = require('express');
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-	host : 'localhost',
-	user : 'root',
-	password : 'root'
-});
 
-connection.query('USE linkedinlabs');
+var mysql = require('mysql');
+var express = require('express');
+var connectionpool = require('./connectionpool');
+
+var connection = connectionpool.getConnection().connection;
 
 //--- Following is executed when user hits/api/user
 module.exports = (function() {
 	'use strict';
+	
 	var users = express.Router();
 	
 	//return details of users
 	users.get('/', function(req, res) {
-		console.log(req.params.id);
-		connection.query('SELECT u.Id, u.Firstname, u.Lastname, u.Email,u.profilepic, u.timestamp FROM users as u', function(err, rows) {
+		var connection = connectionpool.getConnection();
+		connection.connection.query('USE linkedinlabs');
+		connection.connection.query('SELECT u.Id, u.Firstname, u.Lastname, u.Email,u.profilepic, u.timestamp FROM users as u', function(err, rows) {
 			res.json(rows);
 		});
+		connectionpool.releaseConnection(connection.poolId);
 	});
 	
 	//return details of specific user
@@ -154,6 +154,31 @@ module.exports = (function() {
 		});
 	});
 	
+	//return connection invite details of a user
+	users.get('/invite/connections/:node_1', function(req, res) {
+		
+		connection.query('SELECT u.Id, u.Firstname, u.Lastname, u.Email,u.profilepic, u.timestamp as lastlogin, uc.timestamp as invitesenton FROM user_connections uc, users u WHERE (uc.node_2 = '+req.params.node_1+') AND (uc.node_1 = u.id) AND isPending = "true"', function(err, rows) {
+			if(err){
+				console.log(err);
+				res.json ({
+					result: 'error',
+					msg: 'No information found'
+				});
+			}else
+				if(rows != null && rows != undefined && rows.length > 0){
+						res.json({
+							'invitesFound' : true,
+							'invites' : rows
+						});
+				}else{
+					res.json({
+						'invitesFound' : false
+					});
+				}
+					
+		});
+	});
+	
 	//create a connection between 2 users
 	users.post('/connections/:node_1/:node_2',function(req,res){
 		var insertData = {};
@@ -176,6 +201,17 @@ module.exports = (function() {
 			}
 		});
 	})
+	
+	//accept connection invite
+	users.put('/connections/:node_1/:node_2', function(req,res){
+		connection.query('UPDATE user_connections SET isPending = "false" WHERE node_1 = '+req.params.node_1+' AND node_2 = '+req.params.node_2, function(err,result){
+			res.json({
+				'result':'success',
+				'isConnection' : true,
+			});
+		});
+	});
+	
 	//save new user info in database
 	users.post('/', function(req, res) {
 		var bcrypt = require('bcryptjs');

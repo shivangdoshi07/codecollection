@@ -41,22 +41,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 //check if user session is set else redirect to login
 app.use(function(req,res,next){
 	console.log("Requesting URL " + req.url);
-	/*if(req.session && req.session.user){
-		next();
-	}else{
-		if(req.url === '/' || req.url === '/api/session/login')
-			next();
-		else
-			res.redirect('/');
-	}*/
+	
 	next();
 });
 
 /*========Define routes=======*/
 app.use('/',viewsRoute);
 
-//urlencodedParser will parse params sent from Forms
+
 app.use('/api',jsonParser,api);
+
+
 
 // development only
 if ('development' == app.get('env')) {

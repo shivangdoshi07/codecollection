@@ -2,14 +2,17 @@
 		<div layout="row">
 			<!-- top bar column -->
 			<div layout="column" layout-fill>
-				<md-toolbar class="md-medium-tall class="md-primary md-hue-7">
+				<md-toolbar class="md-medium-tall md-primary md-hue-7"><br />
 					<div class="md-toolbar-tools md-toolbar-tools-bottom">
 						<div flex="20"></div>
 						<div flex="20">
-							<h2>LinkedIn Labs</h2>
+							<h3>LinkedIn Labs</h3>
 						</div>
 						<div flex="20" layout="row">
-							
+							<md-input-container>
+						      <input ng-model="search" type="text">
+						    </md-input-container>
+						    <md-button class="md-accent" href="#/search/{{search}}">Search</md-button>
 						</div>
 						<div flex="30"></div>
 					</div>
@@ -24,11 +27,12 @@
 				<md-toolbar md-scroll-shrink>
 					<div class="md-toolbar-tools md-toolbar-tools-bottom background-black">
 						<div flex="20"></div>
-						<div flex="60" layout="row">
+						<div flex="40" layout="row">
 							<md-button class="md-primary" ng-href="#/home">Home</md-button>
-							<md-button class="md-primary" ng-href="#/home">Profile</md-button>
 							<md-button class="md-primary" ng-href="#/connections">Connections</md-button>			
 						</div>
+						<div flex></div>
+						<md-button class="md-accent" ng-href="/logout">Logout</md-button>
 						<div flex="20"></div>
 					</div>
 				</md-toolbar>
@@ -46,12 +50,6 @@
 					    <div layout = "column">
 					    	<div layout = "row">
 					    		<h1>{{userdetails.Firstname + ' '+ userdetails.Lastname}}</h1>
-					    	</div>
-					    	<div layout = "row">
-					    		<h4>Status</h4>
-					    	</div>
-					    	<div layout = "row">
-					    		<h4>Location</h4>
 					    	</div>
 					    </div>
 					    <!-- fill up the space between left and right area -->
