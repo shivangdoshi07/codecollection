@@ -1,0 +1,16 @@
+#root folder ignore
+node_modules/
+.settings/
+.project
+
+#client folder ignore
+client/node_modules/
+client/.settings
+client/.project
+
+#server folder ignore
+server/node_modules/
+server/.settings
+server/.project
+
+node_modules/

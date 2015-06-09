@@ -1,0 +1,50 @@
+<div ng-controller="TableCtrl" ng-init="fetchAllGuards()">
+  <div ng-switch="renderGuard">
+    <div ng-switch-when="true">
+      <div ng-include="'templates/guard.html'" ng-controller="GuardCtrl"
+        ng-init="GuardInfo(guardDetail)"></div>
+    </div>
+    <div ng-switch-default>
+      <h1>Guard Details
+          <span class="glyphicon glyphicon-plus-sign" style="float:right; font-size: xx-large;cursor: pointer;" ng-click="addGuard()">
+          </span>
+      </h1>
+      <alert ng-repeat="alert in alerts_guard" type="danger" close="closeAlert_Guard($index)">{{alert.msg}}</alert>
+      
+      <button ng-click="tableParams.sorting({})" class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+      <button ng-click="tableParams.filter({})" class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+
+      <table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
+        <tbody ng-repeat="user in $data">
+          <tr>
+            <td data-title="'First Name'" ng-click="showGuard(user)" sortable="'firstname'" filter="{ 'firstname': 'text' }">
+              {{user.firstname}}
+            </td>
+            <td data-title="'Last Name'" ng-click="showGuard(user)" sortable="'lastname'" filter="{ 'lastname': 'text' }">
+              {{user.lastname}}
+            </td>
+            <td data-title="'Email Adress'" ng-click="showGuard(user)" sortable="'email'" filter="{ 'email': 'text' }">
+              {{user.email}}
+            </td>
+            <td data-title="'Background'" ng-click="showGuard(user)" sortable="'bg_status'" filter="{ 'bg_status': 'text' }">
+              {{user.bg_status}}
+            </td>
+            <td data-title="'Occupied Status'" ng-click="showGuard(user)" sortable="'is_occupied'" filter="{ 'is_occupied': 'text' }">
+              {{user.is_occupied}}
+            </td>
+            <td>
+              <input class="btn btn-primary" type=button id="editRowBtn{{user.person_id}}" value="Edit" ng-click="setEditId_Guard(user.person_id)">
+            </td>
+            <td>
+              <input class="btn btn-danger" ng-controller="DeleteGuardCtrl" type=button value="Delete" ng-click="deleteGuard(user.person_id)">
+            </td>
+          </tr>
+          <tr ng-show="editId_guard==user.person_id" ng-if="editId_guard==user.person_id">
+            <td colspan="7" ng-include src="'templates/admin/editGuard.html'"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

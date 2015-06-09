@@ -1,0 +1,27 @@
+<div ng-controller="cTableCtrl" ng-init="fetchCGuards()">
+
+  <h1>Guard Details</h1>
+  <button ng-click="tableParams.sorting({})" class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+  <button ng-click="tableParams.filter({})" class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+
+      <table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
+        <tr ng-repeat="user in $data">
+          <td data-title="'First Name'" sortable="'firstname'" filter="{ 'firstname': 'text' }">
+            {{user.firstname}}
+          </td>
+          <td data-title="'Last Name'" sortable="'lastname'" filter="{ 'lastname': 'text' }">
+            {{user.lastname}}
+          </td>
+          <td data-title="'Email Adress'" sortable="'email'" filter="{ 'email': 'text' }">
+            {{user.email}}
+          </td>
+          <td data-title="'Background'" sortable="'bg_status'" filter="{ 'bg_status': 'text' }">
+            {{user.bg_status}}
+          </td>
+          <td data-title="'Occupied Status'" sortable="'is_occupied'" filter="{ 'is_occupied': 'text' }">
+            {{user.is_occupied}}
+          </td>
+        </tr>
+      </table>
+</div>

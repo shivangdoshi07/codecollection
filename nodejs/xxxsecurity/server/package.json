@@ -1,0 +1,12 @@
+{
+  "name": "xxxsecurity-server",
+  "version": "1.0.0",
+  "description": "xxxsecurity-server",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "0.0.3",
+    "mysql": "^2.5.5",
+    "redis": "^0.12.1",
+    "amqp" : "*"
+  }
+}

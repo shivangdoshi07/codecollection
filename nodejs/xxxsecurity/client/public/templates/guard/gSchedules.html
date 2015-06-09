@@ -1,0 +1,36 @@
+<div ng-controller="gTableCtrl" ng-init="fetchGSchedules()">
+
+  <h1>Schedule Details</h1>
+  <button ng-click="tableParams.sorting({})" class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+  <button ng-click="tableParams.filter({})" class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+
+      <table ng-table="tableParams" show-filter="true" class="table">
+        <tr ng-repeat="user in $data">
+          <td data-title="'Building Name'" sortable="'building_name'" filter="{ 'building_name': 'text' }">
+            {{user.building_name}}
+          </td>
+          <td data-title="'Address'" sortable="'address'" filter="{ 'address': 'text' }">
+            {{user.address}}
+          </td>
+          <td data-title="'State'" sortable="'state'" filter="{ 'state': 'text' }">
+            {{user.state}}
+          </td>
+          <td data-title="'City'" sortable="'city'" filter="{ 'city': 'text' }">
+            {{user.city}}
+          </td>
+          <td data-title="'Zip Code'" sortable="'zip_code'" filter="{ 'zip_code': 'text' }">
+            {{user.zip_code}}
+          </td>
+          <td data-title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">
+            {{user.date}}
+          </td>
+          <td data-title="'Start Time'" sortable="'start_time'" filter="{ 'start_time': 'text' }">
+            {{user.start_time}}
+          </td>
+          <td data-title="'End Time'" sortable="'end_time'" filter="{ 'end_time': 'text' }">
+            {{user.end_time}}
+          </td>
+        </tr>
+      </table>
+</div>

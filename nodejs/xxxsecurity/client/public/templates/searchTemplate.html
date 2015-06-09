@@ -1,0 +1,29 @@
+<!-- "client_id": "2",
+  "person_id": 8,
+  "email": "aakash@aa.com",
+  "firstname": "Aakash",
+  "lastname": "Mangal",
+  "role": 1,
+  "monthly_service_charge": 500,
+  "balance": 0 -->
+
+<a ng-show="match.model.alert_schedule_id > 0">
+	{{match.model.building_name}} <br />
+	{{match.model.description}} Alert
+</a>
+<a ng-show="match.model.building_id > 0" ng-controller="AdminCtrl" ng-click="searchTableData('templates/building.html',match.model.building_id)">
+    <b>{{match.model.name}}</b> <br />
+    {{match.model.city}} Building
+</a>
+<a ng-show="match.model.client_id.length > 0" ng-controller="AdminCtrl" ng-click="searchTableData('templates/client.html',match.model.person_id)">
+    <b>{{match.model.firstname}} {{match.model.lastname}}</b> <br />
+    {{match.model.email}} Client
+</a>
+<a ng-show="match.model.guard_id.length > 0" ng-controller="AdminCtrl" ng-click="searchTableData('templates/guard.html',match.model.guard_id)">
+    {{match.model.firstname}} {{match.model.lastname}} <br />
+    {{match.model.email}} Guard
+</a>
+<a ng-show="match.model.report_id.length > 0">
+    {{match.model.firstname}} {{match.model.lastname}} <br />
+    {{match.model.email}} Report
+</a>

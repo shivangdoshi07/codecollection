@@ -1,0 +1,46 @@
+<div ng-init="init()">
+	<div class="modal-header">
+		<h3 class="modal-title">Generate Bill</h3>
+		<alert ng-repeat="alert in alerts" type="danger"
+			close="closeAlert($index)">{{alert.msg}}</alert>
+	</div>
+
+	<div class="modal-body" style="margin-left: 60;">
+
+		<form ng-show="hasData">
+			<div class="row">
+				<div class="span3">
+					<label>Client Name : </label>{{client_name}}
+				</div>
+			</div>
+
+			<div class="row" ng-show="showData">
+				<div class="span3">
+					<label>Bill Date : </label>{{bill_date}}
+				</div>
+			</div>
+			<div class="row" ng-show="showData">
+				<div class="span3">
+					<label>Due Date : </label>{{payment_on}}
+				</div>
+			</div>
+			<div class="row" ng-show="showData">
+				<div class="span3">
+					<label>Amount : </label>{{amount}}
+				</div>
+			</div>
+			<div class="row" ng-show="!showData">
+				<div class="span3">
+					<label>NO DUES !!</label>
+				</div>
+			</div>
+		</form>
+		<form ng-show="!hasData">Select Yes to Generate Bill</form>
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()" ng-show="!hasData">Yes</button>
+		<button class="btn btn-warning" ng-click="cancel()" ng-show="!hasData">No</button>
+		<button class="btn btn-warning" ng-click="cancel()" ng-show="hasData">Done</button>
+	</div>
+</div>

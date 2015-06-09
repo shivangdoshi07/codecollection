@@ -1,0 +1,84 @@
+<div ng-controller="EditGuardCtrl" style="margin-left: 10%;">
+  <alert ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">{{alert.msg}}</alert>
+  <form name="updateGuardForm">
+    <div class="row">
+
+      <div class="row form-group">
+        <div class="span2">
+          <label>First Name : </label>
+        </div>
+        <div class="span2">
+          {{user.firstname}}
+        </div>
+        <div class="span2">
+          <label>Last Name : </label>
+        </div>
+        <div class="span2">
+          {{user.lastname}}
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="span2">
+          <label>Email : </label>
+        </div>
+        <div class="span2">
+          {{user.email}}
+        </div>
+        <div class="span2">
+          <label>SSN : </label>
+        </div>
+        <div class="span2">
+          {{user.guard_id}}
+        </div>
+      </div>
+
+
+      <div class="row form-group">
+        <div class="span2">
+          <label>Address : </label>
+        </div>
+        <div class="span6" ng-class="{ 'has-error' : updateGuardForm.address.$invalid && !updateGuardForm.address.$pristine }">
+          <input type="text" name="address" value="{{user.address}}" ng-model="user.address" class="form-control" required>
+        </div>
+      </div>
+
+
+      <div class="row form-group">
+        <div class="span2">
+          <label>City : </label>
+        </div>
+        <div class="span2" ng-class="{ 'has-error' : updateGuardForm.city.$invalid && !updateGuardForm.city.$pristine }">
+          <input type="text" name="city" value="{{user.city}}" pattern="[A-Za-z ]*" ng-model="user.city" class="form-control" required>
+        </div>
+        <div class="span2">
+          <label>State : </label>
+        </div>
+        <div class="span2" ng-class="{ 'has-error' : updateGuardForm.state.$invalid && !updateGuardForm.state.$pristine }">
+          <input type="text" name="state" value="{{user.state}}" pattern="[A-Za-z ]*" ng-model="user.state" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="span2">
+          <label>Zip Code : </label>
+        </div>
+        <div class="span2" ng-class="{ 'has-error' : updateGuardForm.zip_code.$invalid && !updateGuardForm.zip_code.$pristine }">
+          <input type="text" name="zip_code" value="{{user.zip_code}}" pattern="[0-9][0-9][0-9][0-9][0-9]" ng-model="user.zip_code" class="form-control" required>
+        </div>
+        <div class="span2">
+          <label>Contact Number : </label>
+        </div>
+        <div class="span2" ng-class="{ 'has-error' : updateGuardForm.contact_no.$invalid && !updateGuardForm.contact_no.$pristine }">
+          <input type="text" name="contact_no" value="{{user.contact_no}}" ng-minlength="10" pattern="[0-9]*" ng-model="user.contact_no" class="form-control" required>
+        </div>
+      </div>
+
+
+    </div>
+  </form>
+  <div>
+    <button class="btn btn-primary" ng-click="ok(user)">Update Guard</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,176 @@
+<script type="text/javascript">
+
+var vid = document.getElementById("bgvideo");
+    bgvideo.pause();
+
+</script>
+<video id="bgvideo" class="bgvid" autoplay muted="muted" preload="auto" >
+	<source src="video/bgvideo.mp4" type="video/webm">
+</video>
+
+<div class="container login" ng-controller="LoginCtrl">
+	<div class="row navbar-inner">
+		<div class="col-lg-6 col-md-6 col-xs-12">
+			<h3 class="add-on">XXXSecurity</h3>
+		</div>
+		<div class="col-lg-6 col-md-6 col-xs-12"
+			style="padding-top: 1.5%; left: 13%;">
+			<form name="loginForm" class="form-horizontal" ng-submit="login()"
+				novalidate>
+				<div class="col-xs-4">
+					<div class="row form-group"
+						ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+						<span class="add-on glyphicon glyphicon-user"></span> <input
+							name="username" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" type="email" ng-model="login_username"
+							placeholder="Username" required />
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div
+								ng-show="loginForm.username.$invalid && !loginForm.username.$pristine"
+								class="help-block login-error">Enter
+								a valid email.</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="row form-group"
+						ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+						<span class="add-on glyphicon glyphicon-lock"></span> <input
+							name="password" ng-minlength="5" type="password"
+							ng-model="login_password" placeholder="Password" required />
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div ng-show="loginForm.password.$invalid && !loginForm.password.$pristine"
+								class="help-block login-error">Password
+								required.</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-1" style="padding-left: inherit;">
+					<button type="submit" class="btn btn-primary btn-sm"
+						ng-disabled="loginForm.$invalid">Login</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+  <alert ng-repeat="alert in alerts" type="danger" close="closeAlert_Login($index)">{{alert.msg}}</alert>
+	<div class="row" style="padding-top: 3%;">
+		<div class="col-lg-6 col-md-6 col-s-12" style="padding-top: 5%;margin-left: 2%;">
+			<!-- <carousel interval="myInterval"> <slide
+				ng-repeat="slide in slides" active="slide.active"> <img
+				ng-src="{{slide.image}}" style="margin: auto;"> </slide> </carousel> -->
+		</div>
+		<div class="col-lg-4 col-md-4 col-s-12 background-seashell" style="margin-left: 12%;">
+			<h2>Signup<small>(For Clients Only)</small></h2>
+			<form name="signUpForm" ng-submit="signUp()" novalidate>
+				<div class="col-xs-6" style="padding-left: 0; padding-right: 1;">
+					<div class="form-group"
+						ng-class="{ 'has-error' : signUpForm.firstName.$invalid && !signUpForm.firstName.$pristine }">
+						<input type="text" pattern="[A-Za-z]*" class="form-control"
+							name="firstName" ng-model="firstname" placeholder="First Name"
+							required>
+						<p
+							ng-show="signUpForm.firstName.$invalid && !signUpForm.firstName.$pristine"
+							class="help-block">Your name is required.</p>
+					</div>
+				</div>
+				<div class="col-xs-6" style="padding-left: 0; padding-right: 0;">
+					<div class="form-group"
+						ng-class="{ 'has-error' : signUpForm.lastName.$invalid && !signUpForm.lastName.$pristine }">
+						<input type="text" pattern="[A-Za-z]*" class="form-control"
+							name="lastName" ng-model="lastname" placeholder="Last Name"
+							required>
+						<p
+							ng-show="signUpForm.lastName.$invalid && !signUpForm.lastName.$pristine"
+							class="help-block">Your last name is required.</p>
+					</div>
+				</div>
+				<div class="form-group"
+					ng-class="{ 'has-error' : signUpForm.email.$invalid && !signUpForm.email.$pristine }">
+					<input type="email"
+						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+						class="form-control" name="email" ng-model="email"
+						placeholder="Email address" required>
+					<p
+						ng-show="signUpForm.email.$invalid && !signUpForm.email.$pristine"
+						class="help-block">Enter a valid email.</p>
+				</div>
+				<div class="form-group"
+					ng-class="{ 'has-error' : signUpForm.pwd.$invalid && !signUpForm.pwd.$pristine }">
+					<input type="password" ng-minlength="6" class="form-control"
+						name="pwd" ng-model="pwd"
+						placeholder="Password (6 or more characters)" required>
+					<p ng-show="signUpForm.pwd.$error.minlength" class="help-block">Password
+						is too short.</p>
+				</div>
+				<div class="form-group"
+					ng-class="{ 'has-error' : signUpForm.address.$invalid && !signUpForm.address.$pristine }">
+					<input type="text" class="form-control" name="address"
+						ng-model="address" placeholder="Address" required>
+					<p
+						ng-show="signUpForm.address.$invalid && !signUpForm.address.$pristine"
+						class="help-block">Enter a valid address.</p>
+				</div>
+				<div class="col-xs-4" style="padding-left: 0; padding-right: 1;">
+					<div class="form-group"
+						ng-class="{ 'has-error' : signUpForm.city.$invalid && !signUpForm.city.$pristine }">
+						<input type="text" pattern="[A-Za-z ]*" class="form-control"
+							name="city" ng-model="city" placeholder="City" required>
+						<p
+							ng-show="signUpForm.city.$invalid && !signUpForm.city.$pristine"
+							class="help-block">Enter a valid city.</p>
+					</div>
+				</div>
+				<div class="col-xs-4" style="padding-left: 0; padding-right: 0;">
+					<div class="form-group"
+						ng-class="{ 'has-error' : signUpForm.state.$invalid && !signUpForm.state.$pristine }">
+						<input type="text" pattern="[A-Za-z ]*" class="form-control" typeahead="states.abbreviation for states in us_states | filter:$viewValue | limitTo:8" name="state" ng-model="state" placeholder="State" required>
+						<p
+							ng-show="signUpForm.state.$invalid && !signUpForm.state.$pristine"
+							class="help-block">Enter a valid state.</p>
+					</div>
+				</div>
+
+				<div class="col-xs-4" style="padding-left: 1; padding-right: 0;">
+					<div class="form-group"
+						ng-class="{ 'has-error' : signUpForm.zip_code.$invalid && !signUpForm.zip_code.$pristine }">
+						<input type="text" class="form-control" maxlength="5"
+							pattern="[0-9][0-9][0-9][0-9][0-9]" name="zip_code"
+							ng-model="zip_code" placeholder="Zip Code" required>
+						<p
+							ng-show="signUpForm.zip_code.$invalid && !signUpForm.zip_code.$pristine"
+							class="help-block">Enter a valid zip code.</p>
+					</div>
+				</div>
+
+				<div class="form-group"
+					ng-class="{ 'has-error' : signUpForm.contact_no.$invalid && !signUpForm.contact_no.$pristine }">
+					<input type="text" pattern="[0-9]*" ng-minlength="10"
+						class="form-control" name="contact_no" maxlength="10"
+						ng-model="contact_no" placeholder="Phone Number" required>
+					<p
+						ng-show="signUpForm.contact_no.$invalid && !signUpForm.contact_no.$pristine"
+						class="help-block">Enter a valid contact number.</p>
+				</div>
+
+				<div class="form-group"
+					ng-class="{ 'has-error' : signUpForm.ssn.$invalid && !signUpForm.ssn.$pristine }">
+					<input type="text" maxlength="11"
+						pattern="[0-9][0-9][0-9]+-[0-9][0-9]+-[0-9][0-9][0-9][0-9]"
+						class="form-control" name="ssn" ng-model="ssn"
+						placeholder="Social Security Number" required>
+					<p ng-show="signUpForm.ssn.$invalid && !signUpForm.ssn.$pristine"
+						class="help-block">Enter a valid SSN number. e.g : 123-45-6789</p>
+				</div>
+
+				<div class="form-group" style="padding-top: 10px;">
+					<button type="submit" class="btn btn-primary btn-block"
+						ng-disabled="signUpForm.$invalid">Join Now</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

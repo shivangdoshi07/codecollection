@@ -1,0 +1,53 @@
+<div ng-controller="cTableCtrl" ng-init="fetchCBuildings()">
+	<div ng-switch="renderBuilding">
+		<div ng-switch-when="true">
+			<div ng-include="'templates/building.html'" ng-controller="BuildingCtrl"
+				ng-init="BuildingInfo(buildingDetail)"></div>
+		</div>
+		<div ng-switch-default>
+			<h1>Building Details
+				<span class="glyphicon glyphicon-plus-sign" style="float:right; font-size: xx-large;cursor: pointer;" ng-click="addBuilding()">
+				</span>
+			</h1>
+
+		  <button ng-click="tableParams.sorting({})" class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+		  <button ng-click="tableParams.filter({})" class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+
+		      <table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
+		        <tr ng-repeat="user in $data">
+		          <td data-title="'Building'" ng-click="showBuilding(user.building_id)" sortable="'name'" filter="{ 'name': 'text' }">
+		            <span ng-if="!user.$edit">{{user.name}}</span>
+		            
+		          </td>
+		          <td data-title="'Address'" ng-click="showBuilding(user.building_id)" sortable="'address'" filter="{ 'address': 'text' }">
+		            <span ng-if="!user.$edit">{{user.address}}</span>
+		            
+		          </td>
+		          <td data-title="'State'" ng-click="showBuilding(user.building_id)" sortable="'state'" filter="{ 'state': 'text' }">
+		            <span ng-if="!user.$edit">{{user.state}}</span>
+		            
+		          </td>
+		          <td data-title="'City'" ng-click="showBuilding(user.building_id)" sortable="'city'" filter="{ 'city': 'text' }">
+		            <span ng-if="!user.$edit">{{user.city}}</span>
+		            
+		          </td>
+		          <td data-title="'Zip Code'" ng-click="showBuilding(user.building_id)" sortable="'zip_code'" filter="{ 'zip_code': 'text' }">
+		            <span ng-if="!user.$edit">{{user.zip_code}}</span>
+		            
+		          </td>
+		          <td data-title="'Service Fee'" ng-click="showBuilding(user.building_id)" sortable="'service_fees'" filter="{ 'service_fees': 'text' }">
+		            {{user.service_fees}}
+		          </td>
+		          <td data-title="'Status'" ng-click="showBuilding(user.building_id)" sortable="'status'" filter="{ 'status': 'text' }">
+		            <span ng-if="!user.$edit">{{user.status}}</span>
+		            
+		          </td>
+		          <td>
+		                <a ng-if="!user.$edit" href="" class="btn btn-default btn-xs" ng-click="showBuilding(user.building_id)">Edit</a>
+		                <a href="" class="btn btn-primary btn-xs" ng-click="deleteBuilding(user.building_id)">Delete</a>
+		            </td>
+		        </tr>
+		      </table>
+			</div>
+</div>

@@ -1,0 +1,39 @@
+<div ng-controller="cTableCtrl" ng-init="fetchCContracts()">
+	<div ng-switch="renderContract">
+		<div ng-switch-when="true">
+			<div ng-include="'templates/contract.html'" ng-controller="ContractCtrl"
+				ng-init="ContractInfo(contractDetail)"></div>
+		</div>
+		<div ng-switch-default>
+			<h1>Contract Details
+				<span class="glyphicon glyphicon-plus-sign" style="float:right; font-size: xx-large;cursor: pointer;" ng-click="addContract()">
+				</span>
+			</h1>
+
+			<button ng-click="tableParams.sorting({})"
+				class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+			<button ng-click="tableParams.filter({})"
+				class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+
+			<table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
+				<tr ng-repeat="user in $data" ng-click="showContract(user.contract_id)">
+
+					<td data-title="'Building Name'" sortable="'name'"
+						filter="{ 'name': 'text' }">{{user.name}}</td>
+					<td data-title="'Zip Code'" sortable="'zip_code'"
+						filter="{ 'zip_code': 'text' }">{{user.zip_code}}</td>
+					<td data-title="'Start Date'" sortable="'start_date'"
+						filter="{ 'start_date': 'text' }">{{user.start_date}}</td>
+					<td data-title="'End Date'" sortable="'end_date'"
+						filter="{ 'end_date': 'text' }">{{user.end_date}}</td>
+					<td data-title="'Status'" sortable="'status'"
+						filter="{ 'status': 'text' }">{{user.status}}</td>
+
+					<td data-title="'Number of Guards Allocated'"
+						sortable="'no_of_guards'" filter="{ 'no_of_guards': 'text' }">
+						{{user.no_of_guards}}</td>
+				</tr>
+			</table>
+		</div>
+</div>

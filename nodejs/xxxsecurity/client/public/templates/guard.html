@@ -1,0 +1,102 @@
+<div ng-controller="GuardCtrl" ng-init="SearchGuardInfo()" style="margin-left: 10%;">
+	<!-- style="margin-left: 10%;" -->
+	<div class="container-fluid">
+		<div class="span8 panel panel-primary">
+			<div class="panel-heading">Guard Info</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="span3">
+						<strong>Guard Name : </strong>{{guardData.guard_name}}
+					</div>
+					<div class="span3">
+						<strong>Email : </strong>{{guardData.email}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span6">
+						<strong>Address : </strong>{{guardData.address}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span3">
+						<strong>City : </strong>{{guardData.city}}
+					</div>
+					<div class="span3">
+						<strong>State : </strong>{{guardData.state}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span3">
+						<strong>Zip Code : </strong>{{guardData.zip_code}}
+					</div>
+					<div class="span3">
+						<strong>Contact : </strong>{{guardData.contact_no}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span3">
+						<strong>Service Start Date : </strong>{{guardData.start_date}}
+					</div>
+					<div class="span3">
+						<strong>Service End Date : </strong>{{guardData.end_date}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span3">
+						<strong>Background Status : </strong>{{guardData.bg_status}}
+					</div>
+					<div class="span3">
+						<strong>Occupied Status : </strong>{{guardData.is_occupied}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span6">
+						<strong>Weekly Working Hours : </strong>{{guardData.wkly_wrk_hrs}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span8 panel panel-primary"
+			ng-repeat="guardschedule in guardscheduleData">
+			<div class="panel-heading">Schedule ID
+				{{guardschedule.schedule_id}}</div>
+			<div class="panel-body">
+
+				<div class="row">
+					<div class="span3">
+						<strong>Building Name : </strong>{{guardschedule.building_name}}
+					</div>
+					<div class="span3">
+						<strong>Date : </strong>{{guardschedule.date}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span3">
+						<strong>Start Time : </strong>{{guardschedule.start_time}}
+					</div>
+					<div class="span3">
+						<strong>End Time : </strong>{{guardschedule.end_time}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span6">
+						<strong>Building Address : </strong>{{guardschedule.address}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span3">
+						<strong>City : </strong>{{guardschedule.city}}
+					</div>
+					<div class="span3">
+						<strong>State : </strong>{{guardschedule.state}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span6">
+						<strong>Zip Code : </strong>{{guardschedule.zip_code}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

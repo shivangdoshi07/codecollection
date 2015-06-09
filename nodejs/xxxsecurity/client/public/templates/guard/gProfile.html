@@ -1,0 +1,72 @@
+<div ng-init="getProfileData()">
+	<div class="modal-header">
+		<h3 class="modal-title">Profile</h3>
+	</div>
+
+	<div class="modal-body">
+		<form name="editGuardProfile">
+			<div class="row">
+				<div class="span4">
+					<strong>Name : </strong>{{profileData.guard_name}}
+				</div>
+				<div class="span4">
+					<strong>Email : </strong>{{profileData.email}}
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="span6" ng-class="{ 'has-error' : editGuardProfile.address.$invalid && !editGuardProfile.address.$pristine }">
+					<strong>Address : </strong><input type="text" class="form-control"
+						name="address" ng-model="profileData.address"
+						placeholder="Address" required>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="span2" ng-class="{ 'has-error' : editGuardProfile.city.$invalid && !editGuardProfile.city.$pristine }">
+					<strong>City : </strong><input type="text" class="form-control"
+						pattern="[A-Za-z ]*" name="city" ng-model="profileData.city" placeholder="City"
+						required>
+				</div>
+				<div class="span2" ng-class="{ 'has-error' : editGuardProfile.state.$invalid && !editGuardProfile.state.$pristine }">
+					<strong>State : </strong><input type="text" class="form-control"
+						pattern="[A-Za-z ]*" name="state" ng-model="profileData.state" placeholder="State"
+						required>
+				</div>
+				<div class="span2" ng-class="{ 'has-error' : editGuardProfile.zip_code.$invalid && !editGuardProfile.zip_code.$pristine }">
+					<strong>Zip Code : </strong><input type="text" class="form-control"
+						pattern="[0-9][0-9][0-9][0-9][0-9]"name="zip_code" ng-model="profileData.zip_code"
+						maxlength="5" placeholder="Zip Code" required>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;" ng-class="{ 'has-error' : editGuardProfile.contact_no.$invalid && !editGuardProfile.contact_no.$pristine }">
+				<div class="span6">
+					<strong>Contact Number : </strong><input type="text"
+						pattern="[0-9]*" class="form-control" ng-minlength="10" name="contact_no"
+						maxlength="10" ng-model="profileData.contact_no" placeholder="Contact Number"
+						required>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="span4">
+					<strong>Background Check : </strong>{{profileData.bg_status}}
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="span2">
+					<strong>Occupancy : </strong>{{profileData.is_occupied}}
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="span4">
+					<strong>Tenure : </strong>{{profileData.start_date}} -
+					{{profileData.end_date}}
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="modal-footer">
+		<!-- <div class="pull-left text-danger">{{formError}}</div> -->
+		<button class="btn btn-primary" ng-disabled="editGuardProfile.$invalid"  ng-click="ok()">Save</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

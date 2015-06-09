@@ -1,0 +1,91 @@
+<div ng-init="getClientInit()">
+	<div class="modal-header">
+		<h3 class="modal-title">Add Contract</h3>
+	</div>
+
+	<div class="modal-body">
+
+		<form>
+			<div class="row form-inline">
+				<div class="form-group">
+					<div class="span8">
+						<label>Building  </label> <input type="text"
+							typeahead-template-url='templates/searchTemplate.html'
+							ng-model="selectedBuilding" typeahead-min-length="1"
+							placeholder="Search Building"
+							typeahead="datum as (datum.name) for datum in buildingData"
+							typeahead-loading="loadingLocations" class="form-control" style="width: 50%;margin-left: 2%;">
+					</div>
+
+				</div>
+			</div>
+			<div class="row form-inline" style="margin-top: 2%;">
+				<div class="form-group">
+					<div class="span3">
+						<label>Start Date  </label>
+						<div style="display: inline-block; min-height: 290px;">
+							<datepicker ng-model="selectedStartDate" min-date="minDate" show-weeks="false"
+								class="well well-sm"></datepicker>
+						</div>
+					</div>
+					<div class="span3">
+						<label>End Date  </label>
+						<div style="display: inline-block; min-height: 290px;">
+							<datepicker ng-model="selectedEndDate" min-date="minDate" show-weeks="false"
+								class="well well-sm"></datepicker>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<!-- <form>
+			<div class="row">
+				<div class="span4">
+					<strong>Name : </strong>{{profileData.name}}
+				</div>
+				<div class="span4">
+					<strong>Email : </strong>{{profileData.email}}
+				</div>
+			</div>
+			<div class="row" style="margin-top: 1%;">
+				<div class="span6">
+					<strong>Address : </strong><input type="text" class="form-control"
+						name="address" ng-model="profileData.address"
+						placeholder="Address" required>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 1%;">
+				<div class="span2">
+					<strong>City : </strong><input type="text" class="form-control"
+						name="city" ng-model="profileData.city" placeholder="City"
+						required>
+				</div>
+				<div class="span2">
+					<strong>State : </strong><input type="text" class="form-control"
+						name="state" ng-model="profileData.state" placeholder="State"
+						required>
+				</div>
+				<div class="span2">
+					<strong>Zip Code : </strong><input type="text" class="form-control"
+						name="zip_code" ng-model="profileData.zip_code"
+						placeholder="Zip Code" required>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 1%;">
+				<div class="span6">
+					<strong>Contact Number : </strong><input type="text"
+						class="form-control" name="contact_no"
+						ng-model="profileData.contact_no" placeholder="Contact Number"
+						required>
+				</div>
+			</div>
+		</form> -->
+	</div>
+
+	<div class="modal-footer">
+		<!-- <div class="pull-left text-danger">{{formError}}</div> -->
+		<button class="btn btn-primary" ng-click="ok()">Send Request</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

@@ -1,0 +1,88 @@
+<html ng-app="xxxsecurity">
+<head>
+	<title>XXXSecurity</title>
+
+	<!--Bootstrap CSS-->
+	<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap/bootstrap-responsive.css">
+	<link rel="stylesheet" type="text/css" href="library/ngtable/ng-table.css">
+
+	<!--Application CSS-->
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	
+	<!-- Google Map API -->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+	<!--Angular JS-->
+	<script type="text/javascript" src="library/angular/angular.min.js"></script>
+
+	<!--Angular Route JS-->
+	<script type="text/javascript" src="library/angular-route/angular-route.min.js"></script>
+
+	<!-- Ng Table -->
+	<script src="library/ngtable/ng-table.js"></script>
+
+	<!--jQuery JS-->
+	<script type="text/javascript" src="library/jquery/jquery-2.1.3.min.js"></script>
+
+	<!--Bootstrap JS-->
+	<script type="text/javascript" src="library/bootstrap/bootstrap.min.js"></script>
+
+	<!--Angular Bootstrap JS-->
+	<script type="text/javascript" src="library/angular-bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+
+	<!--App JS-->
+	<script type="text/javascript" src="javascripts/module.js"></script>
+
+	<!--Controllers-->
+	<script type="text/javascript" src="javascripts/controllers/loginController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/adminController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/adminChartController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/homeController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/adminTableController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/userController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/reportController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/buildingController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/guardController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/contractController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/adminProfileController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/searchController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/clientTableController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/clientProfileController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/guardProfileController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/guardTableController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/addContractController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/contractRequestController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/addBuildingController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/addGuardController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/editGuardController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/deleteGuardController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/clientController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/clientChartController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/dateController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/generateBillController.js"></script>
+	
+	<!--Services-->
+	<script type="text/javascript" src="javascripts/services/dataService.js"></script>
+	<script type="text/javascript" src="javascripts/services/dateFormatService.js"></script>
+
+	<!--Utility-->
+	<script type="text/javascript" src="javascripts/utility/constants.js"></script>
+
+	<!--Crypto-->
+	<script type="text/javascript" src="library/client-crypto/cryptoSHA256.min.js"></script>
+
+	<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+</head>
+<body>
+	<ng-view></ng-view>
+</body>
+</html>

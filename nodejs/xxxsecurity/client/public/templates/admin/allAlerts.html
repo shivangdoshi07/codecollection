@@ -1,0 +1,33 @@
+<div ng-controller="TableCtrl" ng-init="fetchAllAlerts()">
+
+  <h1>Alert Details</h1>
+  <button ng-click="tableParams.sorting({})" class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+  <button ng-click="tableParams.filter({})" class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+
+      <table ng-table="tableParams" show-filter="true" class="table">
+        <tr ng-repeat="user in $data">
+          <td data-title="'Alert Message'" sortable="'description'" filter="{ 'description': 'text' }">
+            {{user.description}}
+          </td>
+          <td data-title="'Severity'" sortable="'severity'" filter="{ 'severity': 'text' }">
+            {{user.severity}}
+          </td>
+          <td data-title="'Client Name'" sortable="'client_name'" filter="{ 'client_name': 'text' }">
+            {{user.client_name}}
+          </td>
+          <td data-title="'Building Name'" sortable="'building_name'" filter="{ 'building_name': 'text' }">
+            {{user.building_name}}
+          </td>
+          <td data-title="'Guard Name'" sortable="'guard_name'" filter="{ 'guard_name': 'text' }">
+            {{user.guard_name}}
+          </td>
+          <td data-title="'Incident Date'" sortable="'date'" filter="{ 'date': 'text' }">
+            {{user.date}}
+          </td>
+          <td data-title="'Incident Time'" sortable="'time'" filter="{ 'time': 'text' }">
+            {{user.time}}
+          </td>
+        </tr>
+      </table>
+</div>

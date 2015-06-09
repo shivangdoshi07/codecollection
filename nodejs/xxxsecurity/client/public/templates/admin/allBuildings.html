@@ -1,0 +1,43 @@
+<div ng-controller="TableCtrl" ng-init="fetchAllBuildings()">
+  <div ng-switch="renderBuilding">
+		<div ng-switch-when="true">
+			<div ng-include="'templates/building.html'" ng-controller="BuildingCtrl"
+				ng-init="BuildingInfo(buildingDetail)"></div>
+		</div>
+    <div ng-switch-default>
+      <h1>Building Details</h1>
+      <button ng-click="tableParams.sorting({})" class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+      <button ng-click="tableParams.filter({})" class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+
+        <table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
+          <tr ng-repeat="user in $data" ng-click="showBuilding(user.building_id)">
+            <td data-title="'Building'" sortable="'name'" filter="{ 'name': 'text' }">
+              {{user.name}}
+            </td>
+            <td data-title="'Address'" sortable="'address'" filter="{ 'address': 'text' }">
+              {{user.address}}
+            </td>
+            <td data-title="'State'" sortable="'state'" filter="{ 'state': 'text' }">
+              {{user.state}}
+            </td>
+            <td data-title="'City'" sortable="'city'" filter="{ 'city': 'text' }">
+              {{user.city}}
+            </td>
+            <td data-title="'Zip Code'" sortable="'zip_code'" filter="{ 'zip_code': 'text' }">
+              {{user.zip_code}}
+            </td>
+            <td data-title="'Service Fee'" sortable="'service_fees'" filter="{ 'service_fees': 'text' }">
+              {{user.service_fees}}
+            </td>
+            <td data-title="'Client'" sortable="'client_name'" filter="{ 'client_name': 'text' }">
+              {{user.client_name}}
+            </td>
+            <td data-title="'Status'" sortable="'status'" filter="{ 'status': 'text' }">
+              {{user.status}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<div ng-init="fetchAvailableGuards()">
+	<div class="modal-header">
+		<h3 class="modal-title">Contract Request</h3>
+	</div>
+
+	<div class="modal-body">
+		<form name="contractRequest">
+			<div class="row">
+				<!-- <div class="form-group"> -->
+				<div class="span3">
+					<label>Client : </label>{{contract.client_name}}
+				</div>
+				<div class="span3">
+					<label>Email : </label>{{contract.email}}
+				</div>
+				<div class="span3">
+					<label>Building Name : </label>{{contract.building_name}}
+				</div>
+				<!-- </div> -->
+			</div>
+			<div class="row" style="margin-top: 1%;">
+				<div class="span3">
+					<label>Zip Code : </label>{{contract.zip_code}}
+				</div>
+				<div class="span3">
+					<label>City : </label>{{contract.city}}
+				</div>
+				<div class="span3">
+					<label>State : </label>{{contract.state}}
+				</div>
+			</div>
+			<div class="row" style="margin-top: 1%;">
+				<div class="span3">
+					<label>Client Contact : </label>{{contract.contact_no}}
+				</div>
+				<div class="span3">
+					<label>Contract Start Date : </label>{{contract.start_date}}
+				</div>
+				<div class="span3">
+					<label>Contract End Date : </label>{{contract.end_date}}
+				</div>
+			</div>
+
+			<input id="pac-input" class="controls" type="text"
+				placeholder="Enter a location" ng-model="mapInputData" ng-show="false">
+			<!-- <div id="type-selector" class="controls">
+				<input type="radio" name="type" id="changetype-all"
+					checked="checked"> <label for="changetype-all">All</label>
+
+				<input type="radio" name="type" id="changetype-establishment">
+				<label for="changetype-establishment">Establishments</label> <input
+					type="radio" name="type" id="changetype-address"> <label
+					for="changetype-address">Addresses</label> <input type="radio"
+					name="type" id="changetype-geocode"> <label
+					for="changetype-geocode">Geocodes</label>
+			</div> -->
+			<div id="map-canvas"></div>
+			<div class="row" style="margin-top: 1%;">
+				<div class="span3">
+					<label>Number of Available Guards : </label> {{availableGuards}}
+				</div>
+				<div class="span2">
+					<label>Guards Alloted : </label>
+				</div>
+				<div class="span2" style="margin-left: -5%;"
+					ng-class="{ 'has-error' : contractRequest.no_of_guards.$invalid && !contractRequest.no_of_guards.$pristine }">
+					<input type="text" pattern="[0-9]*" name="no_of_guards"
+						ng-model="contract.no_of_guards" min="1" class="form-control" required>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 1%;">
+				<div class="span3">
+					<label>Start Time : </label>
+					<timepicker ng-model="start_time"
+						show-meridian=false></timepicker>
+				</div>
+				<div class="span3">
+					<label>End Time : </label>
+					<timepicker ng-model="end_time" show-meridian=false></timepicker>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="modal-footer">
+		<!-- <div class="pull-left text-danger">{{formError}}</div> -->
+		<button class="btn btn-primary" ng-disabled="contractRequest.$invalid"
+			ng-click="ok()">Approve</button>
+		<button class="btn btn-warning" ng-click="cancel()">Reject</button>
+	</div>
+</div>

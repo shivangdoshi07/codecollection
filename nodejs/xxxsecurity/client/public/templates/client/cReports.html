@@ -1,0 +1,35 @@
+<div ng-controller="cTableCtrl" ng-init="reportTabInit()">
+	<div ng-switch="renderReport">
+		<div ng-switch-when="true">
+			<div ng-include="'templates/report.html'" ng-controller="ReportCtrl"
+				ng-init="initReport(scheduleForReport)"></div>
+		</div>
+		<div ng-switch-default>
+			<h1>Report Details</h1>
+			<div ng-init="fetchAllReports()">
+				<button ng-click="tableParams.sorting({})"
+					class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+				<button ng-click="tableParams.filter({})"
+					class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+				<table ng-table="tableParams" show-filter="true"
+					class="table ng-table-rowselected">
+					<tr ng-repeat="user in $data" ng-click="showReport(user)">
+						<td data-title="'Client'" sortable="'client_name'"
+							filter="{ 'client_name': 'text' }">{{user.client_name}}</td>
+						<td data-title="'Building'" sortable="'building_name'"
+							filter="{ 'building_name': 'text' }">{{user.building_name}}</td>
+						<td data-title="'Guard'" sortable="'guard_name'"
+							filter="{ 'guard_name': 'text' }">{{user.guard_name}}</td>
+						<td data-title="'Date'" sortable="'date'"
+							filter="{ 'date': 'text' }">{{user.date}}</td>
+						<td data-title="'Start Time'" sortable="'start_time'"
+							filter="{ 'start_time': 'text' }">{{user.start_time}}</td>
+						<td data-title="'End Time'" sortable="'end_time'"
+							filter="{ 'end_time': 'text' }">{{user.end_time}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

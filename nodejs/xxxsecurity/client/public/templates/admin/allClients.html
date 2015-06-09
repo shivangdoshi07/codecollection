@@ -1,0 +1,37 @@
+<div ng-controller="TableCtrl" ng-init="fetchAllClients()">
+  <div ng-switch="renderClient">
+    <div ng-switch-when="true">
+      <div ng-include="'templates/client.html'" ng-controller="ClientCtrl"
+        ng-init="ClientInfo(clientDetail)"></div>
+    </div>
+    <div ng-switch-default>
+      <h1>Client Details</h1>
+
+      <button ng-click="tableParams.sorting({})" class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+      <button ng-click="tableParams.filter({})" class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+      <table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
+        <tr ng-repeat="user in $data">
+          <td data-title="'First Name'" ng-click="showClient(user)" sortable="'firstname'" filter="{ 'firstname': 'text' }">
+            {{user.firstname}}
+          </td>
+          <td data-title="'Last Name'" ng-click="showClient(user)" sortable="'lastname'" filter="{ 'lastname': 'text' }">
+            {{user.lastname}}
+          </td>
+          <td data-title="'Email Adress'" ng-click="showClient(user)" sortable="'email'" filter="{ 'email': 'text' }">
+            {{user.email}}
+          </td>
+          <td data-title="'Monthly Charge'" ng-click="showClient(user)" sortable="'monthly_service_charge'" filter="{ 'monthly_service_charge': 'text' }">
+            {{user.monthly_service_charge}}
+          </td>
+          <td data-title="'Balance'" ng-click="showClient(user)" sortable="'balance'" filter="{ 'balance': 'text' }">
+            {{user.balance}}
+          </td>
+          <td>
+                <a class="btn btn-primary btn-xs" ng-click="generate_bill(user)">Generate Bill</a>
+            </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

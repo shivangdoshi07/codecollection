@@ -1,0 +1,36 @@
+<div ng-controller="ChartController" ng-init="loadData()" >
+  <h1>Dashboard</h1>
+  <div class="row">
+		<div class="span10">
+			<h3>Alerts Trend</h3>
+			<div  ng-init="loadAlertData()" >
+				<div ng-if="alertData.length>0">
+				      <div id="chart"></div>
+  			</div>
+	      <div ng-if="alertData.length<=0">
+		      No data Avaiable
+  			</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span5">
+			<h3>Latest Alerts</h3>
+      <div ng-if="alertData.length<=0">
+            No data Avaiable
+        </div>
+			<div style="font-size:16px;" ng-repeat="item in alertData | limitTo: 5">
+			    <button class="btn btn-danger" style="font-size: x-small;" ng-show="item.severity == 'High'">{{item.severity}}</button>
+			    <button class="btn btn-warning" style="font-size: x-small;" ng-show="item.severity == 'Medium'">{{item.severity}}</button>
+				{{item.date}} : {{item.description}} reported in {{item.building_name}} by {{item.guard_name}}<br />
+			</div>
+		</div>
+		<div class="span5" ng-show="billInfo.length > 0">
+			<h3>Bill</h3>
+			<div style="font-size:16px;" ng-repeat="item in billInfo | limitTo: 5">
+			    <span ng-show="item.status == 'unpaid'">${{item.amount}} is due before {{item.payment_on}}. </span><br />
+			    <span ng-show="item.status == 'paid'">${{item.amount}} paid on {{item.payment_on}}</span><br />
+			</div>
+		</div>
+	</div>
+</div>

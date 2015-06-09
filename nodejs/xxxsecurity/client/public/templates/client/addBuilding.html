@@ -1,0 +1,80 @@
+<div ng-init="init()">
+	<div class="modal-header">
+		<h3 class="modal-title">Add Building</h3>
+		<h5> Click around building to add checkpoints</h5>
+	</div>
+
+	<div class="modal-body">
+
+		<input id="pac-input" class="controls" type="text"
+			placeholder="Enter a location" ng-model="mapInputData">
+		<!-- <div id="type-selector" class="controls">
+      <input type="radio" name="type" id="changetype-all" checked="checked">
+      <label for="changetype-all">All</label>
+
+      <input type="radio" name="type" id="changetype-establishment">
+      <label for="changetype-establishment">Establishments</label>
+
+      <input type="radio" name="type" id="changetype-address">
+      <label for="changetype-address">Addresses</label>
+
+      <input type="radio" name="type" id="changetype-geocode">
+      <label for="changetype-geocode">Geocodes</label>
+    </div> -->
+		<div id="map-canvas"></div>
+
+		<!-- <form>
+			<div class="row">
+				<div class="span2">
+					<label>Building Name</label>
+				</div>
+				<div class="span4" style="margin-left: inherit;">
+					<input type="text" ng-model="building_name"
+						placeholder="Building Name" class="form-control">
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="span2">
+					<label>Address</label>
+				</div>
+				<div class="span4" style="margin-left: inherit;">
+					<input type="text" ng-model="address"
+						placeholder="Address" class="form-control">
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="span2">
+					<label>City </label>
+				</div>
+				<div class="span4" style="margin-left: inherit;">
+					<input type="text" ng-model="city"
+						placeholder="City" class="form-control">
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="span2">
+					<label>State </label> 
+				</div>
+				<div class="span4" style="margin-left: inherit;">
+					<input type="text" ng-model="state"
+						placeholder="State" class="form-control">
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="span2">
+					<label>Zip Code </label>
+				</div>
+				<div class="span4" style="margin-left: inherit;">
+					<input type="text" ng-model="zip_code"
+						placeholder="Zip Code" class="form-control">
+				</div>
+			</div>
+		</form> -->
+	</div>
+
+	<div class="modal-footer">
+		<!-- <div class="pull-left text-danger">{{formError}}</div> -->
+		<button class="btn btn-primary" ng-click="ok()">Add</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

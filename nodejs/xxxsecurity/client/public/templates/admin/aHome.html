@@ -1,0 +1,26 @@
+<div ng-controller="AdminChartController"><h1>Dashboard</h1>
+	<div class="row">
+		<div class="span10">
+			<h3>Alerts Trend</h3>
+			<div  ng-init="loadAlertData()" >
+				<div id="alertChart"></div>
+			</div>
+		</div>
+	</div>
+	<div  class="row" ng-init="loadGuardData()">
+		<div class="span5">
+			<h3>Guard Availability</h3>
+			<div>
+				<div id="guards" style="width: 450px; height: 250px;"></div>
+			</div>
+		</div>
+		<div class="span5">
+			<h3>Latest Alerts</h3>
+			<div style="font-size:16px;" ng-repeat="item in alertData | limitTo: 5">
+			    <button class="btn btn-danger" style="font-size: x-small;" ng-show="item.severity == 'High'">{{item.severity}}</button>
+			    <button class="btn btn-warning" style="font-size: x-small;" ng-show="item.severity == 'Medium'">{{item.severity}}</button>
+				{{item.date}} : {{item.descirption}} reported in {{item.building_name}} by {{item.guard_name}}<br />
+			</div>
+		</div>
+	</div>
+</div>

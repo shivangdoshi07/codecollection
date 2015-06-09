@@ -1,0 +1,70 @@
+<div ng-controller="ClientCtrl" ng-init="SearchClientInfo()" style="margin-left: 10%;">
+	<!-- style="margin-left: 10%;" -->
+	<div class="container-fluid">
+
+    <div class="span8 panel panel-primary">
+      <div class="panel-heading">Client Info</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="span6">
+            <strong>Client Name : </strong>{{clientdetails.firstname}} {{clientdetails.lastname}}
+          </div>
+          <div class="span6">
+            <strong>Balance Payment : </strong>{{clientBalanceData.balance}}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="span8 panel panel-primary">
+			<div class="panel-heading">Contracts Info</div>
+			<div class="panel-body">
+    		<div class="span7 panel panel-primary" ng-repeat="contract in clientContractsData">
+    			<div class="panel-heading">Contracts ID : {{contract.contract_id}}</div>
+    			<div class="panel-body">
+    				<div class="row">
+    					<div class="span3">
+    						<strong>Contract Start Date : </strong>{{contract.start_date}}
+    					</div>
+    					<div class="span3">
+    						<strong>Contract End Date : </strong>{{contract.start_date}}
+    					</div>
+    				</div>
+            <div class="row">
+              <div class="span3">
+                <strong>Building Name : </strong>{{contract.name}}
+              </div>
+              <div class="span3">
+                <strong>Contract Status : </strong>{{contract.status}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="span6">
+                <strong>Building Address : </strong>{{contract.building_id}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="span3">
+                <strong>Building City : </strong>{{contract.city}}
+              </div>
+              <div class="span3">
+                <strong>Contract State : </strong>{{contract.state}}
+              </div>
+            </div>
+    				<div class="row">
+              <div class="span3">
+                <strong>Building Zip Code : </strong>{{contract.zip_code}}
+              </div>
+    					<div class="span3">
+    						<strong>Number of Guards : </strong>{{contract.no_of_guards}}
+    					</div>
+    				</div>
+    			</div>
+
+    		</div>
+      </div>
+    </div>
+	</div>
+</div>

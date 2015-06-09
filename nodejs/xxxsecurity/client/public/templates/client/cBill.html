@@ -1,0 +1,25 @@
+<div ng-controller="cTableCtrl" ng-init="fetchCBill()">
+	<h1>Bill Details</h1>
+
+	<button ng-click="tableParams.sorting({})"
+		class="btn btn-info pull-right btn-spacing">Clear sorting</button>
+	<button ng-click="tableParams.filter({})"
+		class="btn btn-info pull-right btn-spacing">Clear filter</button>
+
+
+	<table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
+		<tr ng-repeat="bill in $data">
+
+			<td data-title="'Bill Number'" sortable="'name'"
+				filter="{ 'id': 'text' }">{{bill.id}}</td>
+			<td data-title="'Bill Date'" sortable="'created_on'"
+				filter="{ 'created_on': 'text' }">{{bill.created_on}}</td>
+			<td data-title="'Due Date'" sortable="'payment_on'"
+				filter="{ 'payment_on': 'text' }">{{bill.payment_on}}</td>
+			<td data-title="'Amount'" sortable="'amount'"
+				filter="{ 'amount': 'text' }">$ {{bill.amount}}</td>
+			<td data-title="'Status'" sortable="'status'"
+				filter="{ 'status': 'text' }">{{bill.status}}</td>
+		</tr>
+	</table>
+</div>

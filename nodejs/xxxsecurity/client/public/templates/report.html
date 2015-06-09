@@ -1,0 +1,128 @@
+<div ng-controller="ReportCtrl" style="margin-left: 10%;">
+	<div class="row">
+		<div class="span2 panel panel-primary">
+			<div class="panel-heading">Property</div>
+			<div class="panel-body">{{building_name}}</div>
+
+		</div>
+		<div class="span3 panel panel-primary">
+			<div class="panel-heading">Date (Time)</div>
+			<div class="panel-body">{{date}} ({{time}})</div>
+
+		</div>
+		<div class="span3 panel panel-primary">
+			<div class="panel-heading">Guard</div>
+			<div class="panel-body">{{guard_name}}</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span8 panel panel-primary">
+			<div class="panel-heading">Checklist</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Number</th>
+							<th>Patrol Time</th>
+							<th>Checkpoint Name</th>
+							<th>Checkpoint Coordinates</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="data in checkpointData">
+							<td>{{$index + 1}}</td>
+							<td>{{data.time}}</td>
+							<td>{{data.checkpoint_name}}</td>
+							<td>{{data.coords}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span8 panel panel-primary">
+			<div class="panel-heading">Theft Reports</div>
+			<div class="panel-body">
+				<div ng-switch="theft.length">
+					<div ng-switch-when="0">No thefts reported for this report</div>
+					<div ng-switch-default>
+						<ul>
+							<li ng-repeat="data in theft">Theft with severity
+								{{data.severity}} reported at {{data.time}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="span8 panel panel-primary">
+			<div class="panel-heading">Trespassing Reports</div>
+			<div class="panel-body">
+				<div ng-switch="trespassing.length">
+					<div ng-switch-when="0">No trespassing reported for this
+						report</div>
+					<div ng-switch-default>
+						<ul>
+							<li ng-repeat="data in trespassing">Trespassing with
+								severity {{data.severity}} reported at {{data.time}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span8 panel panel-primary">
+			<div class="panel-heading">Fire Reports</div>
+			<div class="panel-body">
+				<div ng-switch="fire.length">
+					<div ng-switch-when="0">No fire reported for this report</div>
+					<div ng-switch-default>
+						<ul>
+							<li ng-repeat="data in fire">Fire with severity
+								{{data.severity}} reported at {{data.time}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span8 panel panel-primary">
+			<div class="panel-heading">Parking Violations</div>
+			<div class="panel-body">
+				<div ng-switch="parking.length">
+					<div ng-switch-when="0">No parking violation reported for
+						this report</div>
+					<div ng-switch-default>
+						<ul>
+							<li ng-repeat="data in parking">Parking Violation with
+								severity {{data.severity}} reported at {{data.time}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span8 panel panel-primary">
+			<div class="panel-heading">Patrols</div>
+			<div class="panel-body">
+				<div ng-repeat="data in checkpointData">
+					<div class="panel panel-default">
+						<div class="panel-heading">{{data.time}} -
+							{{data.checkpoint_name}} ({{data.coords}})</div>
+						<div class="panel-body">{{data.description}}</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>

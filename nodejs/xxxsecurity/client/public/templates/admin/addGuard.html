@@ -1,0 +1,140 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">Add Guard</h3>
+		<alert ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">{{alert.msg}}</alert>
+	</div>
+
+	<div class="modal-body" style="margin-left: 60;">
+		<form name="addGuardForm">
+			<div class="row">
+				<div class="row form-group">
+					<div class="span2">
+						<label>First Name : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.firstname.$invalid  && !addGuardForm.firstname.$pristine }">
+						<input type="text" name="firstname" pattern="[A-Za-z]*" ng-model="guard_info.firstname" class="form-control" required>
+					</div>
+					<div class="span2">
+						<label>Last Name : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.lastname.$invalid && !addGuardForm.lastname.$pristine }">
+						<input type="text" name="lastname" pattern="[A-Za-z]*" ng-model="guard_info.lastname" class="form-control" required>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="span2">
+						<label>Email : </label>
+					</div>
+					<div class="span6" ng-class="{ 'has-error' : addGuardForm.email.$invalid && !addGuardForm.email.$pristine }">
+						<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ng-model="guard_info.email" class="form-control" required>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="span2">
+						<label>Password : </label>
+					</div>
+					<div class="span6" ng-class="{ 'has-error' : addGuardForm.password.$invalid && !addGuardForm.password.$pristine }">
+						<input type="password" name="password" ng-minlength="6" ng-model="guard_info.password" class="form-control" required>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="span2">
+						<label>Address : </label>
+					</div>
+					<div class="span6" ng-class="{ 'has-error' : addGuardForm.address.$invalid && !addGuardForm.address.$pristine }">
+						<input type="text" name="address" ng-model="guard_info.address" class="form-control" required>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="span2">
+						<label>City : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.city.$invalid && !addGuardForm.city.$pristine }">
+						<input type="text" name="city" pattern="[A-Za-z ]*" ng-model="guard_info.city" class="form-control" required>
+					</div>
+					<div class="span2">
+						<label>State : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.state.$invalid && !addGuardForm.state.$pristine }">
+						<input type="text" name="state" pattern="[A-Za-z ]*" ng-model="guard_info.state" class="form-control" required>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="span2">
+						<label>Zip Code : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.zip_code.$invalid && !addGuardForm.zip_code.$pristine }">
+						<input type="text" name="zip_code" pattern="[0-9][0-9][0-9][0-9][0-9]" ng-model="guard_info.zip_code" class="form-control" required>
+					</div>
+					<div class="span2">
+						<label>Contact Number : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.contact_no.$invalid && !addGuardForm.contact_no.$pristine }">
+						<input type="text" name="contact_no" ng-minlength="10" pattern="[0-9]*" ng-model="guard_info.contact_no" class="form-control" required>
+					</div>
+				</div>
+
+				<div class="row form-group" ng-controller="DatepickerCtrl">
+					<div class="span2">
+						<label>Start Date : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.start_date.$invalid && !addGuardForm.start_date.$pristine }">
+						<p class="input-group">
+							<input type="text" class="form-control" name="start_date" datepicker-popup="{{format}}" ng-model="$parent.startdateselected" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-primary" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+						</p>
+					</div>
+					<div class="span2">
+						<label>End Date : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.end_date.$invalid && !addGuardForm.end_date.$pristine }">
+						<p class="input-group">
+							<input type="text" class="form-control" name="end_date" datepicker-popup="{{format}}" ng-model="$parent.enddateselected" is-open="opened" min-date="$parent.startdateselected + 1" max-date="'2015-06-22'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-primary" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+						</p>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="span2">
+						<label>SSN : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.ssn.$invalid && !addGuardForm.ssn.$pristine }">
+						<input type="text" name="ssn" pattern="[0-9][0-9][0-9]+-[0-9][0-9]+-[0-9][0-9][0-9][0-9]" ng-model="guard_info.ssn" class="form-control" required>
+					</div>
+					<div class="span2">
+						<label>Background Status : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.bg_status.$invalid && !addGuardForm.bg_status.$pristine }">
+						<input type="text" name="bg_status" pattern="[A-Za-z]*" ng-model="guard_info.bg_status" class="form-control" required>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="span2">
+						<label>Weekly Working Hours : </label>
+					</div>
+					<div class="span2" ng-class="{ 'has-error' : addGuardForm.wkly_wrk_hrs.$invalid && !addGuardForm.wkly_wrk_hrs.$pristine }">
+						<input type="text"  name="wkly_wrk_hrs" pattern="[0-9]*" ng-model="guard_info.wkly_wrk_hrs" class="form-control" required>
+					</div>
+				</div>
+
+
+			</div>
+		</form>
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()">Add Guard</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

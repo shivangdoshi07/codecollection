@@ -1,0 +1,63 @@
+<div ng-controller="BuildingCtrl" style="margin-left: 10%;"><!-- ng-init="SearchBuildingInfo()" -->
+	<!-- style="margin-left: 10%;" -->
+	<div class="container-fluid">
+		<div class="span8 panel panel-primary">
+			<div class="panel-heading">Building Info</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="span3">
+						<strong>Building Name : </strong>{{buildingData.name}}
+					</div>
+					<div class="span3">
+						<strong>Owner : </strong>{{buildingData.client_name}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span6">
+						<strong>Address : </strong>{{buildingData.address}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span3">
+						<strong>City : </strong>{{buildingData.city}}
+					</div>
+					<div class="span3">
+						<strong>State : </strong>{{buildingData.state}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span6">
+						<strong>Zip Code : </strong>{{buildingData.zip_code}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span3">
+						<strong>Service Fee : </strong>{{buildingData.service_fees}}
+					</div>
+					<div class="span3">
+						<strong>Status : </strong>{{buildingData.status}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span8 panel panel-primary"
+			ng-repeat="guards in buildingGuardData">
+			<div class="panel-heading">Guard Info</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="span6">
+						<strong>Guard Name : </strong>{{guards.guard_name}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span8 panel panel-primary">
+			<div class="panel-heading">Building Map with Checkpoints</div>
+			<div class="panel-body">
+				<input id="pac-input" class="controls" type="text"
+					placeholder="Enter a location" ng-model="mapInputData" ng-show="false">
+				<div id="map-canvas"></div>
+			</div>
+		</div>
+	</div>
+</div>
