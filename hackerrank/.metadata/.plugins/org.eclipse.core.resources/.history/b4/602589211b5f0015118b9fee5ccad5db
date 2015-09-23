@@ -1,0 +1,143 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class LaurenInversion {
+	
+	
+	public static HashMap<Integer, Integer> inversionCounts = new HashMap<>(); 
+	public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int[] ar = new int[n];
+        for(int i=0;i<n;i++){
+        	ar[i] = in.nextInt();
+        	inversionCounts.put(ar[i], 0);
+        }
+        long oldInvVal = invCount(ar.clone());
+        int indexWithMaxInv = -1;
+        int maxInv = -1;
+        ArrayList<Integer> indexes = new ArrayList<>();
+        
+        for(int i=1;i<ar.length;i++){
+        	int currVal = inversionCounts.get(ar[i]);
+        	if(currVal > 0){
+        		if(currVal > maxInv){
+            		maxInv = currVal;
+            		indexes.clear();
+            		indexes.add(i);
+            	} else if(currVal == maxInv){
+            		indexes.add(i);
+            	}
+        	}
+        	
+        }
+        if(indexes.size() <= 0)
+        	System.out.println("Cool Array");
+        else{
+        	int indexWithHighNumb = -1;
+        	long newInvVal = oldInvVal;
+        	for(int index : indexes){
+	        	for(int i=0;i<index;i++){
+	        		if(ar[i]>ar[index]){
+	        			int[] temp = ar.clone();
+	        			temp[i] = ar[index];
+	        			temp[index] = ar[i];
+	        			long midInvVal = invCount(temp);
+	        			if(midInvVal < newInvVal){
+	        				newInvVal = midInvVal;
+	        				indexWithHighNumb = i;
+	        				indexWithMaxInv = index;
+	        			}else if(midInvVal == newInvVal){
+	        				if(indexWithHighNumb>i && indexWithMaxInv>=index){
+	        					indexWithHighNumb = i;
+	        					indexWithMaxInv = index;
+	        				}
+	        			}
+	        		}
+	            }
+        	}
+        	System.out.println((indexWithHighNumb+1)+ " " + (indexWithMaxInv+1));
+        }        
+    }
+	
+	static long merge(int[] arr, int[] left, int[] right) {
+	    int i = 0, j = 0, count = 0;
+	    while (i < left.length || j < right.length) {
+	        if (i == left.length) {
+	            arr[i+j] = right[j];
+	            j++;
+	        } else if (j == right.length) {
+	            arr[i+j] = left[i];
+	            i++;
+	        } else if (left[i] <= right[j]) {
+	            arr[i+j] = left[i];
+	            i++;                
+	        } else {
+	            arr[i+j] = right[j];
+	            int shift = left.length-i;
+	            count += shift;
+	            Integer tcount = inversionCounts.get(right[j]);
+	            inversionCounts.put(right[j], tcount + shift);
+	            j++;
+	        }
+	    }
+	    return count;
+	}
+
+	static long invCount(int[] arr) {
+	    if (arr.length < 2)
+	        return 0;
+
+	    int m = (arr.length + 1) / 2;
+	    int left[] = Arrays.copyOfRange(arr, 0, m);
+	    int right[] = Arrays.copyOfRange(arr, m, arr.length);
+
+	    return invCount(left) + invCount(right) + merge(arr, left, right);
+	}
+	
+	static int sortInvCount(int a[]){
+		int count = 0;
+		for (int size=1;size<a.length;size+=size){
+			for(int j=0;j<a.length-size;j+=size+size){
+				count += merge(a,j,j+size-1,Math.min(j+size+size-1, a.length-1));
+			}
+		}
+		return count;
+	}
+	
+	// Method for merging the sub-arrays into sorted bigger arrays
+	static private int merge(int a[],int low,int mid,int high){
+		int count = 0;
+		int aux[] = new int[a.length];
+
+		for(int k = low;k<=high;k++){
+			aux[k] = a[k];
+		}
+
+		int i = low;
+		int j = mid+1;
+		for(int k = low;k<=high;k++){
+			if(j>high){
+				a[k] = aux[i];
+				i++;
+			}else if(i>mid){
+				a[k] = aux[j];
+				j++;
+			}else if(aux[i]<=aux[j]){
+				a[k] = aux[i];
+				i++;
+			}else{
+				a[k] = aux[j];
+				int shift = mid-i;
+	            count += shift;
+				Integer tcount = inversionCounts.get(aux[j]);
+	            inversionCounts.put(aux[j], tcount + shift);
+				j++;
+			}
+		}
+		return count;
+	}
+
+}

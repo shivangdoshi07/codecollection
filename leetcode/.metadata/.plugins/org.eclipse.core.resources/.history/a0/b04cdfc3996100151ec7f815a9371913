@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+/*
+ * Calculate the detour distance between two different rides. Given four latitude / longitude pairs, 
+ * where driver one is traveling from point A to point B and driver two is traveling from point C to 
+ * point D, write a function (in your language of choice) to calculate the shorter of the detour distances 
+ * the drivers would need to take to pick-up and drop-off the other driver.
+ * */
+public class CalDetour {
+
+	public static void main(String args[]){
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter Point A corrdinates: (lat, long)");
+		Double pointA_x = in.nextDouble();
+		Double pointA_y = in.nextDouble();
+		
+		System.out.println("Enter Point B corrdinates: (lat, long)");
+		Double pointB_x = in.nextDouble();
+		Double pointB_y = in.nextDouble();
+		
+		System.out.println("Enter Point C corrdinates: (lat, long)");
+		Double pointC_x = in.nextDouble();
+		Double pointC_y = in.nextDouble();
+		
+		System.out.println("Enter Point D corrdinates: (lat, long)");
+		Double pointD_x = in.nextDouble();
+		Double pointD_y = in.nextDouble();
+
+		// find distance from A>C>B and C>A>D, and take minimum
+		// 37.337397 -121.882786
+		// 37.334855 -121.888086
+		
+		//37.337976 -121.886847
+		// 37.338646 -121.889584
+//		Enter Point A corrdinates: (lat, long)
+//		37.334393 -121.889289
+//		Enter Point B corrdinates: (lat, long)
+//		37.340282 -121.876742
+//		Enter Point C corrdinates: (lat, long)
+//		37.339181 -121.888520
+//		Enter Point D corrdinates: (lat, long)
+//		37.343120 -121.898819
+		
+		Double distance_ACB = distance(pointA_x, pointA_y, pointC_x, pointC_y) + distance(pointC_x, pointC_y, pointB_x, pointB_y);
+		System.out.println(distance_ACB);
+		//Double distance_CAD = distance(pointC_x, pointC_y, pointA_x, pointA_y) + distance(pointA_x, pointA_y, pointD_x, pointD_y);
+//		System.out.println(distance_ACB + " CAD:" + distance_CAD );
+//		if(distance_ACB <= distance_CAD){
+//			System.out.println("Drivers should start from A to C to B. Total Distance: "+distance_ACB+" meters");
+//		}else{
+//			System.out.println("Drivers should start from C to A to D. Total Distance: "+distance_CAD+" meters");
+//		}
+		
+	}
+	
+	private static double distance(double lat1, double lon1, double lat2, double lon2) {
+		char unit = 'K';  
+		double theta = lon1 - lon2;
+		  double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+		  dist = Math.acos(dist);
+		  dist = rad2deg(dist);
+		  dist = dist * 60 * 1.1515;
+		  if (unit == 'K') {
+		    dist = dist * 1.609344;
+		  } else if (unit == 'N') {
+		  dist = dist * 0.8684;
+		    }
+		  return (dist);
+		}
+	
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	/*::  This function converts decimal degrees to radians             :*/
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	private double deg2rad(double deg) {
+	  return (deg * Math.PI / 180.0);
+	}
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	/*::  This function converts radians to decimal degrees             :*/
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	private double rad2deg(double rad) {
+	  return (rad * 180.0 / Math.PI);
+	}
+	
+}

@@ -1,0 +1,124 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class Solution {
+	
+		public static void main(String args[]){
+			Scanner in = new Scanner(System.in);
+			int t = in.nextInt();
+			for(int i = 0; i<t; i++){
+				int n = in.nextInt();
+				int m = in.nextInt();
+				int k = in.nextInt();
+				HashMap<Integer, Integer> cityToVisit = new HashMap<>();
+				/* get cities to be visited */
+				for(int j=0;j<k; j++){
+					int tempV = in.nextInt();
+					cityToVisit.put(tempV, tempV);
+				}
+				/* create graph */
+				HashMap<Integer, List<Integer>> graph = new HashMap<Integer, List<Integer>>();
+				for(int j=0;j<m; j++){
+					int city_1 = in.nextInt();
+					int city_2 = in.nextInt();
+					/* create new city and/or connect city  */
+					if(graph.get(city_1) == null)
+						graph.put(city_1, new ArrayList<Integer>());
+					
+					if(graph.get(city_2) == null)
+						graph.put(city_2, new ArrayList<Integer>());
+					graph.get(city_1).add(city_2);
+					
+				}
+				findRoute(graph, cityToVisit);
+			}
+			in.close();
+		}
+		
+		public static void findRoute(HashMap<Integer, List<Integer>> graph, HashMap<Integer, Integer> cityToVisit){
+			Map<Integer, Integer> map = new TreeMap<Integer, Integer>(cityToVisit);
+
+			ArrayList<Integer> visited = new ArrayList<Integer>();
+			ArrayList<Integer> path = new ArrayList<Integer>();
+			
+			for (Map.Entry<Integer, Integer> entry : map.entrySet())
+			{
+			    int city = entry.getKey();
+			    visited.add(city);
+				path.add(city);
+				int res = searchNext(city, city, graph, cityToVisit, visited, path);
+				if(res == 0)
+					break;
+				else{
+					visited.clear();
+					path.clear();
+				}
+			}
+			
+			
+			if(visited.isEmpty()){
+				System.out.println("-1");
+			}else{
+				if(isCyclic(graph, visited)){
+					visited.sort(new Comparator<Integer>() {
+						@Override
+						public int compare(Integer o1, Integer o2) {
+							if(o1<o2)
+								return -1;
+							else if(o1==o2)
+								return 0;
+							else
+								return 1;
+						}
+					});
+				}
+					
+				for(int visit : visited)
+					System.out.print(visit + " ");
+				System.out.println("");
+			}
+		}
+		
+		public static int searchNext(int startingCity, int currentCity, HashMap<Integer, List<Integer>> graph, HashMap<Integer, Integer> cityToVisit, List<Integer> visited, List<Integer> path){
+			
+			if(visited.size() == cityToVisit.size())
+				return 0; // all city visited
+			
+			List<Integer> connectedCity = graph.get(new Integer(currentCity));
+			
+			if(connectedCity.isEmpty())
+				return -1;
+
+			for(int cCity : connectedCity){
+				if(cCity != currentCity && !path.containsAll(new ArrayList<Integer>(Arrays.asList(currentCity, cCity)))){
+					
+					if(cityToVisit.containsKey(new Integer(cCity)) && !visited.contains(new Integer(cCity))){
+						visited.add(cCity);
+					}
+					path.add(cCity);
+					int res = searchNext(startingCity, cCity, graph, cityToVisit, visited, path);	
+					if(res == 0)
+						return 0;
+					else{
+						visited.remove(new Integer(cCity));
+						path.remove(new Integer(cCity));
+					}
+						
+				}
+			}
+			return -1;
+		}
+		
+		public static boolean isCyclic(HashMap<Integer, List<Integer>> graph, ArrayList<Integer> city){
+			int lastCity = city.get(city.size()-1);
+			return graph.get(new Integer(lastCity)).contains(new Integer(city.get(0)));
+		}
+	}

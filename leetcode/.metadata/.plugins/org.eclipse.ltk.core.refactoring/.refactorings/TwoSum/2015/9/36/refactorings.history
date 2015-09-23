@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;AddTwoNumb&apos; to &apos;LongestSubStr&apos;&#x0A;- Original project: &apos;TwoSum&apos;&#x0A;- Original element: &apos;AddTwoNumb&apos;&#x0A;- Renamed element: &apos;LongestSubStr&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;AddTwoNumb&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{AddTwoNumb.java[AddTwoNumb" matchStrategy="1" name="LongestSubStr" qualified="false" references="true" similarDeclarations="false" stamp="1441496173357" textual="false" version="1.0"/>
+</session>

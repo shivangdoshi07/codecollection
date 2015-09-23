@@ -1,0 +1,23 @@
+
+public class LongestPalindromeSub {
+	public static void main(String args[]){
+		System.out.println(longestPalindrome("abcba"));
+	}
+	
+	public static String longestPalindrome(String s) {
+		if(s.length() == 0)
+			return null;
+		for (int i=0; i<s.length()-1; i++){
+			String temp = "" + s.charAt(i);
+			String substring = s.substring(i+1);
+			
+			if(substring.contains(temp)){
+				int endIndex = substring.indexOf(temp);
+				substring = s.substring(i,endIndex + (i+1));
+				
+				return substring;
+			}
+		}
+        return null;
+    }
+}

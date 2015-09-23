@@ -1,0 +1,76 @@
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+/*
+ * Calculate the detour distance between two different rides. Given four latitude / longitude pairs, 
+ * where driver one is traveling from point A to point B and driver two is traveling from point C to 
+ * point D, write a function (in your language of choice) to calculate the shorter of the detour distances 
+ * the drivers would need to take to pick-up and drop-off the other driver.
+ * Test Case:
+ * Enter Point A corrdinates: (lat, long)
+	37.334393 -121.889289
+	Enter Point B corrdinates: (lat, long)
+	37.340282 -121.876742
+	Enter Point C corrdinates: (lat, long)
+	37.339181 -121.888520
+	Enter Point D corrdinates: (lat, long)
+	37.343120 -121.898819
+ * */
+
+
+
+public class CalDetour {
+
+	public static void main(String args[]){
+		Scanner in = new Scanner(System.in);
+		DecimalFormat df = new DecimalFormat("#.00");
+		
+		//Take input lat and long combinations
+			System.out.println("Enter Point A corrdinates: (lat, long)");
+			Double pointA_x = in.nextDouble();
+			Double pointA_y = in.nextDouble();
+			
+			System.out.println("Enter Point B corrdinates: (lat, long)");
+			Double pointB_x = in.nextDouble();
+			Double pointB_y = in.nextDouble();
+			
+			System.out.println("Enter Point C corrdinates: (lat, long)");
+			Double pointC_x = in.nextDouble();
+			Double pointC_y = in.nextDouble();
+			
+			System.out.println("Enter Point D corrdinates: (lat, long)");
+			Double pointD_x = in.nextDouble();
+			Double pointD_y = in.nextDouble();
+
+		// Find distance from A>C>B and C>A>D, and take minimum
+			Double distance_ACB = distance(pointA_x, pointA_y, pointC_x, pointC_y) + distance(pointC_x, pointC_y, pointB_x, pointB_y);
+			
+			Double distance_CAD = distance(pointC_x, pointC_y, pointA_x, pointA_y) + distance(pointA_x, pointA_y, pointD_x, pointD_y);
+		
+		// Print result 
+		if(distance_ACB <= distance_CAD){
+			System.out.println("Drivers should start from A to C to B. Total Distance: "+df.format(distance_ACB)+" KM");
+		}else{
+			System.out.println("Drivers should start from C to A to D. Total Distance: "+df.format(distance_CAD)+" KM");
+		}
+		
+	}
+	
+	private static double distance(double lat1, double lon1, double lat2, double lon2) { 
+		double theta = lon1 - lon2;
+	  double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+	  dist = Math.acos(dist);
+	  dist = rad2deg(dist);
+	  dist = dist * 60 * 1.1515;
+	  dist = dist * 1.609344;
+	  return (dist);
+	}
+
+	private static  double deg2rad(double deg) {
+	  return (deg * Math.PI / 180.0);
+	}
+
+	private static double rad2deg(double rad) {
+	  return (rad * 180.0 / Math.PI);
+	}
+}

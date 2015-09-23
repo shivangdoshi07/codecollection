@@ -1,0 +1,5 @@
+INDEX VERSION 1.127+/Users/shivang/Projects/workspace/datamining/.metadata/.plugins/org.eclipse.jdt.core
+2633168206.index
+1778797967.index
+4248621687.index
+4217046899.index

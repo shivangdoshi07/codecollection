@@ -1,0 +1,7 @@
+INDEX VERSION 1.127+/Users/shivang/Projects/workspace/hackerrank/.metadata/.plugins/org.eclipse.jdt.core
+1201735371.index
+2697286024.index
+2961135174.index
+105968247.index
+746504416.index
+3446930856.index

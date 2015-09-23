@@ -1,0 +1,64 @@
+import java.util.ArrayList;
+
+public class LongestPalindromeSub {
+	public static void main(String args[]){
+		System.out.println(("ccc").substring(0, 3).lastIndexOf("c"));
+		System.out.println(longestPalindrome("aaaaaa"));
+	}
+	
+	public static String longestPalindrome(String s) {
+		int longestYet = 0;
+		String strLongestYet = "";
+		
+		if(s.length() == 0)
+			return null;
+		if(s.length() == 1)
+			return s;
+		
+		for (int i=0; i<s.length()-1; i++){
+			
+			String temp = "" + s.charAt(i);
+			String substring = s.substring(i+1);
+			String strpalinDrome = "";
+			
+			if(substring.length() < longestYet)
+				return strLongestYet;
+			
+			if(substring.contains(temp)){
+				Object[] endIndexes = getIndex(substring, temp);
+				for(int k =endIndexes.length-1;k>=0;k--){
+					int endIndex = (int) endIndexes[k];	
+					//System.err.println(endIndex);
+					strpalinDrome = s.substring(i,endIndex + (i+2)); 
+					int length = strpalinDrome.length();
+					int j = 0;
+					while(j != (length-1-j) && j<length){
+						if(strpalinDrome.charAt(j) != strpalinDrome.charAt(length-1-j)){
+							strpalinDrome = null; //substring is not a palindrom, erase it
+							break;
+						}
+						j++;
+					}
+					if(strpalinDrome!= null && strpalinDrome.length()>longestYet){
+						strLongestYet = strpalinDrome;
+						System.err.println(strLongestYet);
+						longestYet = strpalinDrome.length();
+					}
+				}
+			}
+		}
+		
+        return strLongestYet;
+    }
+	
+	public static Object[] getIndex(String substring, String needle){
+		int endIndex = substring.indexOf(needle);
+		int[] a;
+		ArrayList<Integer> indexes = new ArrayList<>();
+		while (endIndex >= 0) {
+			indexes.add(endIndex);
+			endIndex = substring.indexOf(needle, endIndex + 1);
+		}
+		return indexes.toArray();
+	}
+}

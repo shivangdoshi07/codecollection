@@ -1,0 +1,161 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Scanner;
+
+public class DeliverySystem {
+	
+	public class CityNode{
+		int name;
+		List<CityNode> connectedCities;
+	}
+	
+	public static void main(String args[]){
+		Scanner in = new Scanner(System.in);
+		int t = in.nextInt();
+		for(int i = 0; i<t; i++){
+			int n = in.nextInt();
+			int m = in.nextInt();
+			int k = in.nextInt();
+			ArrayList<Integer> cityToVisit = new ArrayList<>();
+			/* get cities to be visited */
+			for(int j=0;j<k; j++){
+				cityToVisit.add(in.nextInt());
+			}
+			/* create graph */
+			HashMap<Integer, List<Integer>> graph = new HashMap<Integer, List<Integer>>();
+			for(int j=0;j<m; j++){
+				int city_1 = in.nextInt();
+				int city_2 = in.nextInt();
+				/* create new city and/or connect city  */
+				if(graph.get(city_1) == null)
+					graph.put(city_1, new ArrayList<Integer>());
+				
+				if(graph.get(city_2) == null)
+					graph.put(city_2, new ArrayList<Integer>());
+				graph.get(city_1).add(city_2);
+				
+			}
+			findRoute(graph, cityToVisit);
+		}
+		in.close();
+	}
+	
+	public static void findRoute(HashMap<Integer, List<Integer>> graph, ArrayList<Integer> cityToVisit){
+		cityToVisit.sort(new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				if(o1<o2)
+					return -1;
+				else if(o1==o2)
+					return 0;
+				else
+					return 1;
+			}
+		});
+		ArrayList<Integer> visited = new ArrayList<Integer>();
+		ArrayList<Integer> path = new ArrayList<Integer>();
+		for(int city : cityToVisit){
+			visited.add(city);
+			path.add(city);
+			int res = searchNext(city, city, graph, cityToVisit, visited, path);
+			if(res == 0)
+				break;
+			else
+				visited.clear();
+		}
+		
+		if(visited.isEmpty()){
+			System.out.println("-1");
+		}else{
+			if(isCyclic(graph, visited)){
+				visited.sort(new Comparator<Integer>() {
+					@Override
+					public int compare(Integer o1, Integer o2) {
+						if(o1<o2)
+							return -1;
+						else if(o1==o2)
+							return 0;
+						else
+							return 1;
+					}
+				});
+			}
+				
+			for(int visit : visited)
+				System.out.print(visit + " ");
+			System.out.println("");
+		}
+	}
+	
+	public static int searchNext(int startingCity, int currentCity, HashMap<Integer, List<Integer>> graph, ArrayList<Integer> cityToVisit, List<Integer> visited, List<Integer> path){
+		System.out.println("City:" + currentCity);
+		for(int visit : path)
+			System.out.print(visit + " ");
+		System.out.println("");
+		
+		if(equalLists(visited, cityToVisit))
+			return 0; // all city visited
+		
+		List<Integer> connectedCity = graph.get(new Integer(currentCity));
+		
+		if(connectedCity.isEmpty())
+			return -1;
+		
+		for(int cCity : connectedCity){
+			if(cCity != currentCity){
+				if(cityToVisit.contains(new Integer(cCity)) && !visited.contains(new Integer(cCity))){
+					visited.add(cCity);
+				}
+				path.add(cCity);
+				int res = searchNext(startingCity, cCity, graph, cityToVisit, visited, path);	
+				if(res == 0)
+					return 0;
+				else{
+					visited.remove(new Integer(cCity));
+					path.remove(new Integer(cCity));
+				}
+					
+			}
+		}
+		return -1;
+	}
+	
+	public static boolean isCyclic(HashMap<Integer, List<Integer>> graph, ArrayList<Integer> city){
+		int lastCity = city.get(city.size()-1);
+		return graph.get(new Integer(lastCity)).contains(new Integer(city.get(0)));
+	}
+	
+	public static boolean equalLists(List<Integer> one, List<Integer> two){     
+	    if (one == null && two == null){
+	        return true;
+	    }
+
+	    if((one == null && two != null) 
+	      || one != null && two == null
+	      || one.size() != two.size()){
+	        return false;
+	    }
+
+	    //to avoid messing the order of the lists we will use a copy
+	    one = new ArrayList<Integer>(one); 
+	    two = new ArrayList<Integer>(two);   
+
+	    Collections.sort(one);
+	    Collections.sort(two);      
+	    return one.equals(two);
+	}
+	
+	public static void printGraph(HashMap<Integer, List<Integer>> graph){
+		for(Entry<Integer,List<Integer>> city: graph.entrySet()){
+			System.out.println(city.getKey() + " :");
+			for(Integer nCity : city.getValue()){
+				System.out.println("  -> "+nCity);
+			}
+		}
+	}
+}

@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+/*
+ * Calculate the detour distance between two different rides. Given four latitude / longitude pairs, 
+ * where driver one is traveling from point A to point B and driver two is traveling from point C to 
+ * point D, write a function (in your language of choice) to calculate the shorter of the detour distances 
+ * the drivers would need to take to pick-up and drop-off the other driver.
+ * */
+public class CalDetour {
+
+	public static void main(String args[]){
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter Point A corrdinates: (lat, long)");
+		int pointA_x = in.nextInt();
+		int pointA_y = in.nextInt();
+		
+		System.out.println("Enter Point B corrdinates: (lat, long)");
+		int pointB_x = in.nextInt();
+		int pointB_y = in.nextInt();
+		
+		System.out.println("Enter Point C corrdinates: (lat, long)");
+		int pointC_x = in.nextInt();
+		int pointC_y = in.nextInt();
+		
+		System.out.println("Enter Point D corrdinates: (lat, long)");
+		int pointD_x = in.nextInt();
+		int pointD_y = in.nextInt();
+	}
+	
+	public static int findDistance(int ax, int ay, int bx, int by){
+		return 0;
+	}
+	
+}

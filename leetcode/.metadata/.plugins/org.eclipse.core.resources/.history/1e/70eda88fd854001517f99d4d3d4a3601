@@ -1,0 +1,10 @@
+
+public class LongestPalindromeSub {
+	public static void main(String args[]){
+		System.out.println(longestPalindrome("abcba"));
+	}
+	
+	public String longestPalindrome(String s) {
+        return null;
+    }
+}
